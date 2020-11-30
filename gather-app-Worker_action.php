@@ -6,7 +6,6 @@
 <link href='https://fonts.googleapis.com/css?family=Black Han Sans' rel='stylesheet'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <link href='https://fonts.googleapis.com/css?family=Be Vietnam' rel='stylesheet'>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 <style>
 ul {
   list-style-type: none;
@@ -82,6 +81,9 @@ body {
   margin:0;
   background-color:lightgreen;
   font-family:'Be Vietnam';
+  text-align:left;
+  
+   
 }
 p{
     margin-left:150px;
@@ -97,7 +99,6 @@ input[type=text],input[type=password] {
    background-color: #3CBC8D;
   color: white;
   border-radius: 4px;
- 
 }
 input[type=text],input[type=password]:focus {
   border: 3px solid #555;
@@ -107,7 +108,7 @@ input[type=submit]{
 border: 2px solid grey;
   border-radius: 4px;
 }
-input[type=button], input[type=submit], input[type=reset]{
+input[type=button], input[type=submit], input[type=reset] {
   background-color: #3CBC8D;
   border: none;
   color: white;
@@ -116,8 +117,22 @@ input[type=button], input[type=submit], input[type=reset]{
   margin: 4px 2px;
   cursor: pointer;
   border: 2px solid grey;
+   border-radius: 4px;
+   margin-left:700px;
 }
-
+#b1{ background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 2px solid grey;
+   border-radius: 4px;
+   align:center;
+   margin-left:700px;
+   display:inline-block;}
+   
 select {
 display:block;
   
@@ -144,11 +159,8 @@ h1 {
 </style>
 </head>
 <body>
-
-
-
 <ul>
-  <li><a href="gather-home.php" >Home</a></li>
+  <li><a href="gather-app-Worker.php" >Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">sign-up</a>
     <div class="dropdown-content">
@@ -159,6 +171,7 @@ h1 {
   </li>
   <li><a href="gather-contact.htm">Contact</a></li>
   <li><a href="gather-about.htm">About</a></li>
+  
 </ul>
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
@@ -166,50 +179,43 @@ h1 {
 
 <?php
 session_start();
-echo $_SESSION["WpasswordErr"];
-echo $_SESSION["WuserErr"];
+$Bname = $_SESSION["workerBuisness"];
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "gather-blocker";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,$dbname);
+
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT `id`, `name`, `street`, `city`, `max-capacity`, `category`, `user-name`, `real-time` FROM `shops` WHERE `name`='$Bname' ";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+	$row = mysqli_fetch_assoc($result)
+	$cap=$row["real-time"];
+	
+}
+$cap++;
+
+$sql2 ="UPDATE `shops` SET `real-time`='$cap' WHERE `name`=`$Bname` ";
+
 
 
 ?>
 
 
-<p>hello dear worker,please enter your private details</p>
 
 
 
-<form action="Worker_action.php"target="_self" method="post" autocomplete="off">
-
-<label for="first-name">first-name:</label><br>
-<input type="text" id="first-name" name="first-name" required value=""><br> 
-
-<label for="last-name">last-name:</label><br>
-<input type="text" id="last-name" name="last-name" required value=""><br> 
-
-  
-<label for="user-name">user-name:</label><br>
-<input type="text" id="user-name" name="user-name" required value=""><br>
-  
-  
-<label for="password">password:</label><br>
-<input type="password" id="password" name="password" required value=""><br>
-
-<label for="password-confirm">password-confirm:</label><br>
-<input type="password" id="password-confirm" name="password-confirm" required value=""><br>
-
-<label for="buisness-name">buisness-name:</label><br>
-<input type="text" id="buisness-name" name="buisness-name" required value=""><br>
-
-<input type="submit" value="Submit">  
-    
- 
-</form>
-
-
-
- 
 
 
 
 
 </body>
+
 </html>

@@ -127,6 +127,12 @@ display:block;
 }
 
 @media screen and (max-width:800px) {
+	h1{padding-top:150px;
+	  }
+	  
+	     
+
+ul{position:fixed;}
 li{width:100%;
 text-align:center;
 }
@@ -136,6 +142,14 @@ h1 {
  text-align:center;
   font-family: "Sofia";
   font-size:35px;
+  }
+  table {
+  width: 50%;
+  border-collapse: collapse;
+  }
+  table, td, th {
+  border: 1px solid black;
+  padding: 2px;
   }
 }
 #myBtn,#myBtn1{
@@ -149,12 +163,23 @@ h1 {
   cursor: pointer;
   border: 2px solid grey;
 }
+table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+table, td, th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+th {text-align: left;}
 
 </style>
 </head>
 <body>
 <ul>
-  <li><a href="gather-home.php" >Home</a></li>
+  <li><a href="gather-app-manager.php" >Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">sign-up</a>
     <div class="dropdown-content">
@@ -165,6 +190,9 @@ h1 {
   </li>
   <li><a href="gather-contact.htm">Contact</a></li>
   <li><a href="gather-about.htm">About</a></li>
+  <li><a href="gather-home.php">log-out</a></li>
+  <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+  {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
 </ul>
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
@@ -178,11 +206,7 @@ h1 {
 
 session_start();
 
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    echo "Welcome to the member's area, " . $_SESSION['username'] . "!";
-} else {
-    echo "Please log in first to see this page.";
-}
+
 
 $get_user=$_SESSION['username'];
 $servername = "localhost";
@@ -201,21 +225,37 @@ if (!$conn) {
 $sql="SELECT `id`, `name`, `street`, `city`, `max-capacity`, `category`, `user-name`,`real-time` FROM `shops` WHERE `user-name`='$get_user'";
 
 if (mysqli_query($conn, $sql)) {
-  echo "<h2>connected sucssesfully!<h2>";
+  echo "<h2>shop list!<h2>";
 } else {
   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-	echo "results for user name:".$get_user."<br>";
-	
+	echo "<br><br><br><br>results for user name:".$get_user."<br><br><br><br>";
+	echo "<table>
+          <tr>
+          <th>Shop-name</th>
+		  <th>Street</th>
+		  <th>City</th>
+		  <th>max-capacity</th>
+		  <th>Category</th>
+		  <th>Real-time content</th>
+		  </tr>";
   // output data of each row
   while($row = mysqli_fetch_assoc($result)) {
-    echo "id: " . $row["id"]. " - Name: " . $row["name"]. " - street: " . $row["street"]. "-city: " . $row["city"]. "-capacity: " 
-	. $row["max-capacity"]. " category:" . $row["category"]."-people inside store:".$row["real-time"]. "<br>";
-  }
-} else {
+	    echo "<tr>";
+		echo "<td>" . $row['name'] . "</td>";
+		echo "<td>" . $row['street'] . "</td>";
+		echo "<td>" . $row['city'] . "</td>";
+		echo "<td>" . $row['max-capacity'] . "</td>";
+		echo "<td>" . $row['category'] . "</td>";
+		echo "<td>" . $row['real-time'] . "</td>";
+		echo "</tr>";
+    }
+
+}
+else {
   echo "0 results";
 }
 
