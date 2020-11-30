@@ -162,7 +162,7 @@ h1 {
 </head>
 <body>
 <ul>
-  <li><a href="gather-home.php" >Home</a></li>
+  <li><a href="gather-app-manager.php" >Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">sign-up</a>
     <div class="dropdown-content">
@@ -173,6 +173,9 @@ h1 {
   </li>
   <li><a href="gather-contact.htm">Contact</a></li>
   <li><a href="gather-about.htm">About</a></li>
+  <li><a href="gather-home.php">log-out</a></li>
+   <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+  {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
 </ul>
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
@@ -183,9 +186,9 @@ h1 {
 <p>hello dear manager,click the bottun if you want to add your buisness/shop</p>
 <button id="myBtn">click</button><br>
 
-<form id="f1" action="gather-app-action.php"target="_self" method="post" autocomplete="off">
+<form id="f1" action="gather-app-manager_action.php"target="_self" method="post" autocomplete="off">
 
-<label for="name">name:</label><br>
+<label for="name">buisness/shop name:</label><br>
 <input type="text" id="name" name="name" required value=""><br> 
 
 
@@ -249,6 +252,7 @@ h1 {
 <p>in order to see yor shops click </p>
 <button id="myBtn1" onclick="document.location='shop-list-manager.php'">shop-list</button><br>
 
+
 <script>  
 var x = document.getElementById("myBtn");
 x.addEventListener("click", displayform);
@@ -258,15 +262,7 @@ function displayform() {
 }
  </script>
 
-<?php
-session_start();
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    echo "Welcome to the member's area, " . $_SESSION['username'] . "!";
-} else {
-    echo "Please log in first to see this page.";
-}
 
-?>
 
 
 

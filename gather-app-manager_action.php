@@ -6,7 +6,6 @@
 <link href='https://fonts.googleapis.com/css?family=Black Han Sans' rel='stylesheet'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <link href='https://fonts.googleapis.com/css?family=Be Vietnam' rel='stylesheet'>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 <style>
 ul {
   list-style-type: none;
@@ -97,7 +96,6 @@ input[type=text],input[type=password] {
    background-color: #3CBC8D;
   color: white;
   border-radius: 4px;
- 
 }
 input[type=text],input[type=password]:focus {
   border: 3px solid #555;
@@ -107,7 +105,7 @@ input[type=submit]{
 border: 2px solid grey;
   border-radius: 4px;
 }
-input[type=button], input[type=submit], input[type=reset]{
+input[type=button], input[type=submit], input[type=reset] {
   background-color: #3CBC8D;
   border: none;
   color: white;
@@ -116,8 +114,21 @@ input[type=button], input[type=submit], input[type=reset]{
   margin: 4px 2px;
   cursor: pointer;
   border: 2px solid grey;
+   border-radius: 4px;
+   margin-left:700px;
 }
-
+#b1{ background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 2px solid grey;
+   border-radius: 4px;
+   align:center;
+   margin-left:700px;}
+   
 select {
 display:block;
   
@@ -144,11 +155,8 @@ h1 {
 </style>
 </head>
 <body>
-
-
-
 <ul>
-  <li><a href="gather-home.php" >Home</a></li>
+  <li><a href="gather-app-manager.php" >Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">sign-up</a>
     <div class="dropdown-content">
@@ -159,40 +167,22 @@ h1 {
   </li>
   <li><a href="gather-contact.htm">Contact</a></li>
   <li><a href="gather-about.htm">About</a></li>
+    <li><a href="gather-home.php">log-out</a></li>
+	 <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+  {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
 </ul>
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
 <h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
 
+<button id="b1" onclick="document.location='gather-app-manager.php'">return-home </button>
 
-<form action="home_action.php"target="_self" method="post" autocomplete="off">
-<fieldset>
-    <legend>Log-in:</legend>
-  <label for="user-name">user-name:
-  <i class="fas fa-user"></i>
-  </label><br>
-  <input type="text" id="user-name" name="user-name" required value=""><br>
-  <label for="password">password:
-  <i class="fas fa-lock"></i>
-  </label><br>
-  <input type="password" id="password" name="password" required value=""><br><br>
-  
-  
-    <label for="duty">authorization:</label><br>
-   <select id="duty" name="duty">
-  <option value="Manager">Manager</option>
-  <option value="Worker">Worker</option>
-  <option value="client">client</option>
-  <option value="guest">guest</option>
-  </select>
-  
-  <input type="submit" value="Submit">
-  </fieldset>
-  
-  </form>
-  
-  
- 
+
+
+
+
+
+
 
 
 
@@ -200,3 +190,40 @@ h1 {
 </body>
 </html>
 
+<?php
+session_start();
+$get_name = $_POST['name'];
+$get_city = $_POST['city'];
+$get_user = $_SESSION['username'];
+$get_street = $_POST['street'];
+$get_capacity = $_POST['capacity'];
+$get_category = $_POST['category'];
+
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "gather-blocker";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,$dbname);
+
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+
+
+$sql = "INSERT INTO `shops`(`id`, `name`, `street`, `city`, `max-capacity`, `category`, `user-name`) VALUES (null,'$get_name','$get_street','$get_city','$get_capacity','$get_category','$get_user')";
+if (mysqli_query($conn, $sql)) {
+  echo "<h2>buisness/shop added sucssesfully!<h2>";
+} else {
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+
+
+
+
+?>

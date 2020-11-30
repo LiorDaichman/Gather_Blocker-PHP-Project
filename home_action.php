@@ -145,13 +145,14 @@ display:block;
 li{width:100%;
 text-align:center;
 }
-li a{width:91%}
+li a{width:100%;}
 h1 {
     margin-top:200px;
  text-align:center;
   font-family: "Sofia";
   font-size:35px;
   }
+  
 }
 
 </style>
@@ -230,7 +231,7 @@ if($get_auto=='client'){
 			 if($row["password"]==$get_pas){
 				 $_SESSION['loggedin'] = true;
                  $_SESSION['username'] = $get_user;
-				 header("Location:gather-app-manager.php");
+				 header("Location:gather-app-Client.php");
 				 
 			    echo " password ok <br>";
 			 }
@@ -277,7 +278,7 @@ elseif($get_auto=='Manager'){
 			    echo "password ok <br>";
 				 $_SESSION['loggedin'] = true;
                  $_SESSION['username'] = $get_user;
-				header("Location:gather-app.php");
+				header("Location:gather-app-Worker.php");
 			 }
 			 else {echo "wrong password  <br>";}
 			 
