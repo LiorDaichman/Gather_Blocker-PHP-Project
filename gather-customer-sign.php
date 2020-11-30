@@ -148,7 +148,7 @@ h1 {
     <a href="javascript:void(0)" class="dropbtn">sign-up</a>
     <div class="dropdown-content">
       <a href="gather-customer-sign.php">customer</a>
-      <a href="#">employee</a>
+      <a href="gather-Worker-sign.php">employee</a>
       <a href="gather-manager-sign.php">manager</a>
     </div>
   </li>
@@ -160,6 +160,14 @@ h1 {
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
 <h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
+
+<?php
+session_start();
+echo $_SESSION["CpasswordErr"];
+echo $_SESSION["CuserErr"];
+
+
+?>
 
 <p>hello dear customer ,please enter your private details</p>
 
@@ -178,6 +186,9 @@ h1 {
   
 <label for="password">password:</label><br>
 <input type="password" id="password" name="password" required value=""><br>
+
+<label for="password-confirm">password-confirm:</label><br>
+<input type="password" id="password-confirm" name="password-confirm" required value=""><br>
 
 <input type="submit" value="Submit">  
     

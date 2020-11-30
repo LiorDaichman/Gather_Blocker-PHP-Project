@@ -160,7 +160,7 @@ h1 {
     <a href="javascript:void(0)" class="dropbtn">sign-up</a>
     <div class="dropdown-content">
       <a href="gather-customer-sign.php">customer</a>
-      <a href="#">employee</a>
+      <a href="gather-Worker-sign.php">employee</a>
       <a href="gather-manager-sign.php">manager</a>
     </div>
   </li>
@@ -188,11 +188,35 @@ h1 {
 
 
 <?php
+require_once "funcs.php";
+session_start();
+$_SESSION["CpasswordErr"] = "";
+$_SESSION["CuserErr"] = "";
+
+
+
+
+
 $get_name = $_POST['first-name'];
 $get_lname = $_POST['last-name'];
 $get_user = $_POST['user-name'];
 $get_pas = $_POST['password'];
+$get_pas_confirm=$_POST['password-confirm'];
 
+if(availableUser($get_user)==false){
+	$_SESSION["CuserErr"] = "user name not available";
+    
+}
+if(passwordCheck($get_pas)==false){
+	$_SESSION["CpasswordErr"] = "password is too short";
+	}
+	if(passwordCheck_confirm($get_pas,$get_pas_confirm)==false){
+	$_SESSION["CpasswordErr"]= "-password isn't match ";
+	}
+	
+if($_SESSION["CpasswordErr"] != ""||$_SESSION["CuserErr"] != ""){ header("Location:gather-customer-sign.php");}
+
+else{
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -216,7 +240,7 @@ if (mysqli_query($conn, $sql)) {
 }
 
 mysqli_close($conn);
-
+}
 
 
 
