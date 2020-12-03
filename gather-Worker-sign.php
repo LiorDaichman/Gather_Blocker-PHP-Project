@@ -32,6 +32,7 @@ li a {
   text-decoration: none;
 }
 
+// style of background page
 li a:hover  {
     background-color: Moccasin;
    color:black;
