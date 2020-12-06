@@ -8,6 +8,7 @@
 <link href='https://fonts.googleapis.com/css?family=Black Han Sans' rel='stylesheet'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <link href='https://fonts.googleapis.com/css?family=Be Vietnam' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 ul {
   list-style-type: none;
@@ -71,7 +72,7 @@ li.dropdown {
 
 
 h1{
-    margin-top:10px;
+    margin-top:100px;
  text-align:center;
   font-family: "Sofia";
   font-size: 48px;
@@ -83,33 +84,32 @@ body {
   margin:0;
   background-color:lightgreen;
   font-family:'Be Vietnam';
+  text-align:left;
+  
+   
 }
 p{
-    
-   font-size: 20px; 
-   text-align:center;
+    margin-left:150px;
+   font-size: 34px; 
 }
-#f1{
-	display: none;
+form{
     margin:auto;
+    padding:20px 250px;
     text-align:center; 
-	
-	
 }
-input[type=text] ,input[type=password]{
+input[type=text],input[type=password] {
   border: 2px solid grey;
    background-color: #3CBC8D;
   color: white;
   border-radius: 4px;
 }
-input[type=text]:focus {
+input[type=text],input[type=password]:focus {
   border: 3px solid #555;
 }
 input[type=submit]{
 
 border: 2px solid grey;
   border-radius: 4px;
-  align:center;
 }
 input[type=button], input[type=submit], input[type=reset] {
   background-color: #3CBC8D;
@@ -120,8 +120,36 @@ input[type=button], input[type=submit], input[type=reset] {
   margin: 4px 2px;
   cursor: pointer;
   border: 2px solid grey;
+   border-radius: 4px;
+   margin-left:700px;
 }
-
+#b1{ background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 2px solid grey;
+   border-radius: 4px;
+   align:center;
+   margin-left:680px;
+   display:none;
+   }
+  
+  #c1,#c12{ background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 2px solid grey;
+   border-radius: 4px;
+   align:center;
+   margin-left:680px;
+   display:inline-block;}
+   
 select {
 display:block;
   
@@ -144,23 +172,9 @@ h1 {
   font-size:35px;
   }
 }
-#myBtn,#myBtn1{
-	display:block;
-	background-color: #3CBC8D;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: auto;
-  cursor: pointer;
-  border: 2px solid grey;
-}
-#c1,#c2,#c3{border: 2px solid grey;
-   background-color: #3CBC8D;
-  color: white;
-  border-radius: 4px;}
-  
-  .sidenav {
+#demo,#check,#checkO{text-align:center;}
+
+.sidenav {
   height: 100%;
   width: 0;
   position: fixed;
@@ -197,21 +211,6 @@ h1 {
   transition: margin-left .5s;
   padding: 16px;
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table, td, th {
-  border: 1px solid black;
-  padding: 5px;
-}
-
-th {text-align: left;}
-
-#f2{display: block;
-    margin:auto;
-    text-align:center; }
 
 </style>
 </head>
@@ -228,15 +227,16 @@ th {text-align: left;}
   </li>
   <li><a href="gather-contact.htm"><i class="fas fa-paper-plane"></i> Contact</a></li>
   <li><a href="gather-about.htm"><i class="fas fa-info-circle"></i> About</a></li>
-  <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
-   <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+    <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
+	 <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
   {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
+  
 </ul>
 
 <div id="mySidenav" class="sidenav">
  <a href="gather-app-manager.php"><i class="fa fa-home"></i> Home</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="gather-app-Client^manager.php"><i class='fab fa-drupal'></i> Client-app</a>
+  <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
   <a href="#"><i class="fas fa-cogs"></i> settings</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
@@ -249,110 +249,22 @@ th {text-align: left;}
 <h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
 
 
-<p>in order to check in to one of your shops please proceed to client app</p>
-<p>hello dear manager,click the bottun if you want to add your buisness/shop</p>
-<button id="myBtn">click</button><br>
-
-<form id="f1" action="gather-app-manager_action.php"target="_self" method="post" autocomplete="off">
-
-<label for="name">buisness/shop name:</label><br>
-<input type="text" id="name" name="name" required value=""><br> 
 
 
- <label for="street">street:</label><br>
-<input type="text" id="street" name="street" required value=""><br>
+<?php
+session_start();
+$get_user=$_SESSION['username'];
+$get_ID = $_POST['ID'];
+$_SESSION['bID']=$get_ID;
 
-<label for="city">city:</label><br>
- <input list="cities" name="city" id="c1" required value="">
-  <datalist id="cities">
-    <option value="Afula">
-    <option value="Arad">
-    <option value="Ashdod">
-    <option value="Ashkelon">
-    <option value="Bat Yam">
-    <option value="Beer sheba">
-    <option value="Beit She'an">
-    <option value="Beit Shemesh">
-    <option value="Bnei Brak">
-    <option value="Dimona">
-    <option value="Eilat">
-    <option value="Givatayim">
-    <option value="Hadera">
-    <option value="Haifa">
-    <option value="Herzliya">
-    <option value="Holon">
-    <option value="Jerusalem">
-    <option value="Kfar Saba">
-    <option value="Kiryat Ata">
-    <option value="Kiryat Gat">
-    <option value="Lod">
-    <option value="Netanya">
-    <option value="Nahariya">
-    <option value="Petah Tikva">
-    <option value="Ra'anana">
-    <option value="Ramat Gan">
-    <option value="Ramat HaSharon">
-    <option value="Ramla">
-    <option value="Rehovot">
-    <option value="Rishon LeZion">
-    <option value="Rosh HaAyin">
-    <option value="Tel Aviv-Yafo">
-  </datalist><br>
- 
+echo "<h2 style='font-family:Baumans'>hello:--".$get_user."--for manual insert of people on buisness with id: ".$get_ID."</h2>"; 
 
 
-<label for="capacity">maximum-capacity:</label><br>
-<input type="text" id="capacity" name="capacity" required value=""><br>
+?>
 
-<label for="category">category:</label><br>
- <input list="category" name="category" id="c2" required value="">
-  <datalist id="category">
-     <option value="Arts">
-    <option value="Automotive">
-    <option value="Baby">
-	<option value="beauty">
-    <option value="clothing">
-    <option value="Computers">
-    <option value="Electronics">
-    <option value="Entertainment">
-    <option value="Food">
-	<option value="Gadgets">
-    <option value="grocery">
-    <option value="Health">
-    <option value="Home & Garden">
-	<option value="Kitchen">
-	<option value="Music">
-    <option value="Office">
-    <option value="Sports ">
-	<option value="Outdoors">
-    <option value="Toys">
-	<option value="Travel">
-	<option value="Education">
-	<option value="other">
-  </datalist><br>
-
-
-<input type="submit" value="Submit">  
-    
- 
-</form>
-
-<p>click in order to see yor shops  </p>
-<button id="myBtn1" onclick="loadDoca()">shop-list</button><br>
-
-<div id="checkO"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
-
-
-<h2 style='font-family:Baumans'>dear worker if you need to update manually the number of people in the buisness choose your shops id and click the button</h2>
-
-
-<form id="f2" action="gather-app-manager-manual.php"target="_self" method="post" autocomplete="off">
- 
- 
- <label for="ID">ID:</label><br>
- <input list="ID" name="ID" id="c3" required value="">
- <datalist id="ID">
- <option value="1">1</option>
+<select id="f1" name="id" onchange="loadDocs(this.value)">
+  <option value="">:</option>
+  <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
   <option value="4">4</option>
@@ -392,14 +304,16 @@ th {text-align: left;}
   <option value="38">38</option>
   <option value="39">39</option>
   <option value="40">40</option>
-  </datalist><br>
+  
+  </select>
 
-<input type="submit" value="for manual inserting"></input>
-</form>
+<div id="demo"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
 
 
-<script>  
+<button id="c12" onclick="document.location='gather-app-manager.php'">go back to app</button>
 
+</body>
+<script>
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
@@ -412,36 +326,24 @@ function closeNav() {
   document.body.style.backgroundColor = "lightgreen";
 }
 
-var x = document.getElementById("myBtn");
-x.addEventListener("click", displayform);
-
-function displayform() {
-  document.getElementById("f1").style.display="block";
-}
-
-function loadDoca() {
-  
+function loadDocs(str) {
+  if(str==" "){
+    document.getElementById("demo").innerHTML = " ";
+    return;
+	}
+	else{
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("checkO").innerHTML = this.responseText;
+      document.getElementById("demo").innerHTML = this.responseText;
     }
   };
  
-  xhttp.open("GET", "shop-list-manager.php", true);
+  xhttp.open("GET", "manual2.php?q="+str, true);
   xhttp.send();
-  
+  }
 }
- </script>
+</script>
 
-
-
-
-
-
-
-
-
-
-</body>
 </html>
+

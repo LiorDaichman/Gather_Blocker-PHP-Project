@@ -14,7 +14,7 @@ table, td, th {
   padding: 5px;
 }
 
-th {text-align: left;}
+th {text-align: center;}
 </style>
 </head>
 <body>
@@ -51,6 +51,7 @@ if (mysqli_num_rows($result) > 0) {
 	echo "<br><br>results for user name:".$get_user."<br><br>";
 	echo "<table>
           <tr>
+		  <th>id</th>
           <th>Shop-name</th>
 		  <th>Street</th>
 		  <th>City</th>
@@ -61,6 +62,7 @@ if (mysqli_num_rows($result) > 0) {
   // output data of each row
   while($row = mysqli_fetch_assoc($result)) {
 	    echo "<tr>";
+		echo "<td>" . $row['id'] . "</td>";
 		echo "<td>" . $row['name'] . "</td>";
 		echo "<td>" . $row['street'] . "</td>";
 		echo "<td>" . $row['city'] . "</td>";
