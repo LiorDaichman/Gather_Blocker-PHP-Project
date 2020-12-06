@@ -145,7 +145,7 @@ h1 {
 </head>
 <body>
 <ul>
-  <li><a href="gather-app-manager.php" ><i class="fa fa-home"></i> Home</a></li>
+  <li><a href="gather-home.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
     <div class="dropdown-content">
