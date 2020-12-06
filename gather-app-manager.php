@@ -343,7 +343,7 @@ th {text-align: left;}
 <div id="checkO"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
 
 
-<h2 style='font-family:Baumans'>dear worker if you need to update manually the number of people in the buisness choose your shops id and click the button</h2>
+<h2 style='font-family:Baumans'>dear manager if you need to update manually the number of people in the buisness choose your shops id and click the button</h2>
 
 
 <form id="f2" action="gather-app-manager-manual.php"target="_self" method="post" autocomplete="off">
