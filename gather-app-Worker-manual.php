@@ -89,7 +89,7 @@ body {
    
 }
 p{
-    margin-left:150px;
+    
    font-size: 34px; 
 }
 form{
@@ -209,13 +209,24 @@ h1 {
 }
 #main {
   transition: margin-left .5s;
-  padding: 16px;
+  padding:4px;
+}
+div.sticky {
+ 
+  position: sticky;
+  top: 0;
+  padding: 2px;
+  background-color:Moccasin;
+  border: 2px solid Moccasin;
+  border-radius:4px;
+  
 }
 
 </style>
 </head>
 <body>
 <ul>
+
   <li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
@@ -234,15 +245,23 @@ h1 {
 </ul>
 
 <div id="mySidenav" class="sidenav">
+<a href="#"><i class="fas fa-user"></i><? echo $_SESSION['username']."<br>";echo "working at :".$_SESSION["workerBuisness"];  if($_SESSION['insideB']!=" "){
+	 echo "<br>youre in:".$_SESSION['insideB'];
+ }
+ ?> </a>
  <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
+ <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
   <a href="#"><i class="fas fa-cogs"></i> settings</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
 
+<div class="sticky"><b id="clock" style="font-family:Baumans;font-size:48px; float:right;"></b>
+
 <div id="main">
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span></div>
+
 </div>
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
@@ -309,10 +328,17 @@ echo "<h2 style='font-family:Baumans'>hello:--".$get_user."--for manual insert o
 <div id="demo"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
 
 
-<button id="c12" onclick="document.location='gather-app-Worker.php'">go back to app</button>
+<button id="c12" onclick="document.location='gather-app-Worker.php'">go back to worker app</button>
 
 </body>
 <script>
+function displayTime() {
+   let date = new Date();
+   let time = date.toLocaleTimeString();
+   document.getElementById('clock').textContent = time;
+}
+
+const createClock = setInterval(displayTime, 1000);
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";

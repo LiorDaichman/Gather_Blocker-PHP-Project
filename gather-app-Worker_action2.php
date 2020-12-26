@@ -24,7 +24,7 @@ $sql2="UPDATE `shops` SET `real-time`=`real-time`-1 WHERE `name`='$bName'";
 
 
 if (mysqli_query($conn, $sql2)) {
-  
+  $_SESSION['checked_in']="no";
   echo "<h2 style='font-family:Baumans'>checked out successfully</h2>";
 } else {
   echo "Error updating record: " . mysqli_error($conn);

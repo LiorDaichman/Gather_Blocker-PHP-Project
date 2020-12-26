@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,7 +90,7 @@ body {
    
 }
 p{
-    margin-left:150px;
+   
    font-size: 34px; 
 }
 form{
@@ -123,32 +124,32 @@ input[type=button], input[type=submit], input[type=reset] {
    border-radius: 4px;
    margin-left:700px;
 }
-#b1{ background-color: #3CBC8D;
+#b1{ background-color: tomato;
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 16px 128px;;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: auto;
   cursor: pointer;
   border: 2px solid grey;
    border-radius: 4px;
    align:center;
-   margin-left:680px;
    display:none;
    }
   
   #c1,#c12{ background-color: #3CBC8D;
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 16px 128px;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: auto;
   cursor: pointer;
   border: 2px solid grey;
    border-radius: 4px;
-   align:center;
-   margin-left:680px;
-   display:inline-block;}
+  
+  
+   display:inline-block;
+   }
    
 select {
 display:block;
@@ -166,7 +167,7 @@ text-align:center;
 }
 li a{width:91%}
 h1 {
-    margin-top:200px;
+    margin-top:10px;
  text-align:center;
   font-family: "Sofia";
   font-size:35px;
@@ -209,45 +210,63 @@ h1 {
 }
 #main {
   transition: margin-left .5s;
-  padding: 16px;
+  padding: 4px;
 }
+div.sticky {
+ 
+  position: sticky;
+  top: 0;
+  padding: 2px;
+  background-color:Moccasin;
+  border: 2px solid Moccasin;
+  border-radius:4px;
+  
+}
+table #center {
+	
+  margin-left: auto; 
+  margin-right: auto;
+   width:25%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+td {
+   text-align:center;
+   height:5px;
+  
+}
+td:hover {background-color: #f5f5f5;}
+
+#center td, #center th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.button32 {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button32:hover {background-color: #3e8e41}
+
+.button32:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 
 </style>
 </head>
 <body>
-<ul>
-  <li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
-  <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
-    <div class="dropdown-content">
-      <a href="gather-customer-sign.php">customer</a>
-      <a href="gather-Worker-sign.php">employee</a>
-      <a href="gather-manager-sign.php">manager</a>
-    </div>
-  </li>
-  <li><a href="gather-contact.htm"><i class="fas fa-paper-plane"></i> Contact</a></li>
-  <li><a href="gather-about.htm"><i class="fas fa-info-circle"></i> About</a></li>
-    <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
-	 <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
-  {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
-  
-</ul>
-
-<div id="mySidenav" class="sidenav">
- <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
-  <a href="#"><i class="fas fa-cogs"></i> settings</a>
-  <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
-</div>
-
-<div id="main">
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-</div>
-
-<h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
-<h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
-
 
 <?php
 session_start();
@@ -277,7 +296,6 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
 	$row = mysqli_fetch_assoc($result);
 	$_SESSION["workerBuisness"]=$row["buisness-name"];
-	echo "<h2 style='font-family:Baumans'>hello:--".$get_user."--your working at :".$_SESSION["workerBuisness"]."</h2>"; 
 	
 }
 
@@ -285,20 +303,88 @@ if (mysqli_num_rows($result) > 0) {
 
 ?>
 
-<button id="c1" onclick="loadDoca()">check-in to shop</button>
 
-<div id="check"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
+<ul>
+  <li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
+    <div class="dropdown-content">
+      <a href="gather-customer-sign.php">customer</a>
+      <a href="gather-Worker-sign.php">employee</a>
+      <a href="gather-manager-sign.php">manager</a>
+    </div>
+  </li>
+  <li><a href="gather-contact.htm"><i class="fas fa-paper-plane"></i> Contact</a></li>
+  <li><a href="gather-about.htm"><i class="fas fa-info-circle"></i> About</a></li>
+    <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
+	 <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+  {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
+  
+</ul>
 
-<button id="b1" type="button" onclick="loadDoca2()">check out from the shop</button>
+<div id="mySidenav" class="sidenav">
+ <a href="#"><i class="fas fa-user"></i><? echo $_SESSION['username']."<br>";echo "working at :".$_SESSION["workerBuisness"];  if($_SESSION['insideB']!=" "){
+	 echo "<br>youre in:".$_SESSION['insideB'];
+ }
+ ?> </a>
+ <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
+ <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update</a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
+  <a href="#"><i class="fas fa-cogs"></i> settings</a>
+  <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
+</div>
+
+<div class="sticky"><b id="clock" style="font-family:Baumans;font-size:48px; float:right;"></b>
+
+<div id="main">
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span></div>
+
+</div>
+
+<h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
+<h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
+
+
+<p align="center" id='p41' style='font-family:Baumans;display:none;'>guests counting</p>
+
+<p id='p40' align="center" style='display:none'><button class="button32" type="button" onclick="loadDocim('2')"><i class="fas fa-user-plus"></i></button>
+<button class="button32" type="button" onclick="loadDocim('-')"><i class="fas fa-user-minus"></i></button></p>
+
+<div id="checkas"><b style="font-family:Baumans;font-size:24px;"></b></div>
+
+<table id="center">
+  <tr>
+    <td><button id="b1" type="button" onclick="loadDoca2()">check out from the shop</button></td>
+    <td><button id="c1" onclick="loadDoca()">check-in to shop</button></td> 
+  </tr>
+</table>
+
+<div id="check"><b style="font-family:Baumans;font-size:24px;"></b></div>
+<div id="check1"><b style="font-family:Baumans;font-size:24px;"></b></div>
+
+
+<br><br><br>
 
 
 
-<h2 style='font-family:Baumans'>dear worker if you need to update manually the number of people in the buisness click</h2>
 
-<button id="c12" onclick="document.location='gather-app-Worker-manual.php'">for manual inserting</button>
+
+<?
+mysqli_close($conn);
+?>
 
 
 <script>
+
+
+function displayTime() {
+   let date = new Date();
+   let time = date.toLocaleTimeString();
+   document.getElementById('clock').textContent = time;
+}
+
+const createClock = setInterval(displayTime, 1000);
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
@@ -311,12 +397,26 @@ function closeNav() {
   document.body.style.backgroundColor = "lightgreen";
 }
 
+var stats = localStorage.getItem("status_w");
+if(stats!==null){
+	$(document).ready(function(){
+	  $("#b1").show();
+	  $("#c1").hide();
+	  $('#p40').show();
+	  $('#p41').show();
+	  alert("welcome back,if you got out the buisness please check out");
+	});
+}
+
 $(document).ready(function(){
   $("#c1").click(function(){
     $(this).hide();
 	$("#b1").show();
+	$('#p40').show();
+	$('#p41').show();
 	alert("now your in!, please don't forget to check out as well!");
-	
+	localStorage.setItem("status_w", true);
+	setTimeout(loadDocas(), 500);
   });
 });
 
@@ -324,10 +424,40 @@ $(document).ready(function(){
   $("#b1").click(function(){
     $(this).hide();
 	$("#c1").show();
+	$('#p40').hide();
+	$('#p41').hide();
+	localStorage.removeItem("status_w");
+	setTimeout(loadDocas(), 500);
 	
   });
 });
-
+$(document).on('click', '.checkbutton', function () {
+    $("#b1").show();
+    $('.checkbutton').hide();
+	$("#c1").hide();
+	localStorage.setItem("status_w", true);
+	setTimeout(loadDocas(), 500);
+	$('#p40').show();
+	$('#p41').show();
+	
+});
+$(document).ready(function(){
+setTimeout(loadDocas(), 500);	
+	
+});
+function loadDocas() {
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("check1").innerHTML = this.responseText;
+    }
+  };
+ 
+  xhttp.open("GET", "shop-list-worker.php", true);
+  xhttp.send();
+  
+}
 function loadDoca() {
   
   var xhttp = new XMLHttpRequest();
@@ -355,6 +485,29 @@ function loadDoca2() {
   
 }
 
+function loadDocim(str) {
+  if(str==" "){
+    
+    return;
+	}
+	else{
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("checkas").innerHTML = this.responseText;
+    }
+  };
+ 
+  xhttp.open("GET", "worker-guest_check.php?q="+str, true);
+  xhttp.send();
+  }
+}
+
+$(document).on('click', '.button32', function () {
+setTimeout(loadDocas(), 500);
+setTimeout(function () {document.getElementById('foo').style.display='none'},2200);
+	
+});
 
 </script>
 
