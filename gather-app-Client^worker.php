@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,12 +73,12 @@ li.dropdown {
 
 
 h1{
-    margin-top:100px;
+    margin-top:10px;
  text-align:center;
   font-family: "Sofia";
   font-size: 48px;
 }
-h2{
+h2{ 
     text-align:center;   
 }
 body {
@@ -91,8 +90,8 @@ body {
    
 }
 p{
-    margin-left:150px;
-   font-size: 34px; 
+   
+   font-size: 24px; 
 }
 form{
     margin:auto;
@@ -125,18 +124,19 @@ input[type=button], input[type=submit], input[type=reset] {
    border-radius: 4px;
    
 }
-#b1{ background-color: #3CBC8D;
+#b1{ background-color: #f4511e;
   border: none;
   color: white;
   padding: 16px 32px;
   text-decoration: none;
-  margin: 4px 2px;
   cursor: pointer;
   border: 2px solid grey;
    border-radius: 4px;
    align:center;
-   margin-left:700px;
    display:none;}
+   
+   
+  
    
 select {
 display:block;
@@ -153,12 +153,8 @@ li{width:100%;
 text-align:center;
 }
 li a{width:91%}
-h1 {
-    margin-top:200px;
- text-align:center;
-  font-family: "Sofia";
-  font-size:35px;
-  }
+
+   
 }
 #f5{
 float:left;
@@ -205,15 +201,34 @@ margin-right:25px;
 }
 #main {
   transition: margin-left .5s;
-  padding: 16px;
+  padding: 4px;
 }
-
+div.sticky {
+ 
+  position: sticky;
+  top: 0;
+  padding: 2px;
+  background-color:Moccasin;
+  border: 2px solid Moccasin;
+  border-radius:4px;
+  
+}
+#gm{ background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid grey;
+   border-radius: 4px;
+   align:center;
+   }
 </style>
 
 </head>
 <body>
 <ul>
-  <li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
+<li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
     <div class="dropdown-content">
@@ -232,90 +247,92 @@ margin-right:25px;
 
 
 <div id="mySidenav" class="sidenav">
- <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
+<a href="#"><i class="fas fa-user"></i><? echo $_SESSION['username']."<br>";echo "working at :".$_SESSION["workerBuisness"];  if($_SESSION['insideB']!=" "){
+	 echo "<br>youre in:".$_SESSION['insideB'];
+ }
+ ?> </a> <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
+ <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="gather-app-Client"><i class='fab fa-drupal'></i> Client-app</a>
-  <a href="#"><i class="fas fa-cogs"></i> settings</a>
+  <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
+  <a href="settings_worker.php"><i class="fas fa-cogs"></i> settings</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
+<div class="sticky"><b id="clock" style="font-family:Baumans;font-size:48px; float:right;"></b>
 
 <div id="main">
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span></div>
+<button id="b1" type="button" onclick="loadDoca()">check out</button>
 </div>
-
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
-<h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
+<h2 style='font-family:Baumans'>"go out when it's safe" !
 
-<h2 style='font-family:Baumans'>select a city in order to watch available buisnesess by cities</h2>
+<div id="check"><b style="font-family:Baumans;font-size:24px;"></b></div>
 
-<h2 id="BYca" style='font-family:Baumans'>select a category in order to watch available buisnesess by categories</h2>
+
+
+
+
+<div id="checkO"><b style="font-family:Baumans;font-size:24px;"></b></div>
 
 <form>
 <select id="f4" name="users" onchange="loadDoc(this.value)">
     <option value=" ">select a city</option>
-	<option value="Afula">Afula:</option>
-    <option value="Arad">Arad:</option>
-    <option value="Ashdod">Arad:</option>
-    <option value="Ashkelon">Ashkelon:</option>
-    <option value="Bat Yam">Bat Yam:</option>
-    <option value="Beer sheba">Beer sheba:</option>
-    <option value="Beit She'an">Beit She'an:</option>
-    <option value="Beit Shemesh">Beit Shemesh:</option>
-    <option value="Bnei Brak">Bnei Brak:</option>
-    <option value="Dimona">Dimona:</option>
-    <option value="Eilat">Eilat:</option>
-    <option value="Givatayim">Givatayim:</option>
-    <option value="Hadera">Hadera:</option>
-    <option value="Haifa">Haifa:</option>
-    <option value="Herzliya">Herzliya:</option>
-    <option value="Holon">Holon:</option>
-    <option value="Jerusalem">Jerusalem:</option>
-    <option value="Kfar Saba">Kfar Saba:</option>
-    <option value="Kiryat Ata">Kiryat Ata:</option>
-    <option value="Kiryat Gat">Kiryat Gat:</option>
-    <option value="Lod">Lod:</option>
-    <option value="Netanya">Netanya:</option>
-    <option value="Nahariya">Nahariya:</option>
-    <option value="Petah Tikva">Petah Tikva:</option>
-    <option value="Ra'anana">Ra'anana:</option>
-    <option value="Ramat Gan">Ramat Gan:</option>
-    <option value="Ramat HaSharon">Ramat HaSharon:</option>
-    <option value="Ramla">Ramla:</option>
-    <option value="Rehovot">Rehovot:</option>
-    <option value="Rishon LeZion">Rishon LeZion:</option>
-    <option value="Rosh HaAyin">Rosh HaAyin:</option>
-    <option value="Tel Aviv-Yafo">Tel Aviv-Yafo:</option>
+    
+  
+  <?php 
+        session_start();
+        $get_user = $_SESSION['username'];
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "admin";
+
+// Create connection
+        $conn = mysqli_connect($servername,$username,$password,$dbname);
+
+// Check connection
+       if (!$conn) {
+         die("Connection failed: " . mysqli_connect_error());
+         }
+        $records = mysqli_query($conn, "SELECT DISTINCT  `city` FROM `shops` WHERE 1");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['city'] ."'>" .$data['city']."</option>";  // displaying data in option menu
+        }	
+    ?>  
   
   </select>
 </form>
 
 <form>
 <select id="f5" name="category" onchange="loadDoc2(this.value)">
-      <option value="">select a category</option>
-     <option value="Arts">Arts</option>
-    <option value="Automotive">Automotive</option>
-    <option value="Baby">Baby</option>
-	<option value="beauty">beauty</option>
-    <option value="clothing">clothing</option>
-    <option value="Computers">Computers</option>
-    <option value="Electronics">Electronics</option>
-    <option value="Entertainment">Entertainment</option>
-    <option value="Food">Food</option>
-	<option value="Gadgets">Gadgets</option>
-    <option value="grocery">grocery</option>
-    <option value="Health">Health</option>
-    <option value="Home & Garden">Home & Garden</option>
-	<option value="Kitchen">Kitchen</option>
-	<option value="Music">Music</option>
-    <option value="Office">Office</option>
-    <option value="Sports ">Sports</option>
-	<option value="Outdoors">Outdoors</option>
-    <option value="Toys">Toys</option>
-	<option value="Travel">Travel</option>
-	<option value="Education">Education</option>
-	<option value="other">other</option>
-  </select>
+      <option value=" ">select a category</option>
+    
+</form><?php 
+        session_start();
+        $get_user = $_SESSION['username'];
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "admin";
 
+// Create connection
+        $conn = mysqli_connect($servername,$username,$password,$dbname);
+
+// Check connection
+       if (!$conn) {
+         die("Connection failed: " . mysqli_connect_error());
+         }
+        $records = mysqli_query($conn, "SELECT DISTINCT  `category` FROM `shops` WHERE 1");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['category'] ."'>" .$data['category']."</option>";  // displaying data in option menu
+        }	
+    ?>  
+  
+  </select>
 </form><br><br><br>
 
 
@@ -326,58 +343,62 @@ margin-right:25px;
 
 <br><br>
 
-<h2 style='font-family:Baumans'>And then select the id of the shop that you want to enter</h2>
+<h2 style='font-family:Baumans'>full buisness list</h2>
 
 
 
 
 <form>
 <select id="f1" name="id" onchange="loadDocs(this.value)">
-  <option value="">:</option>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="16">16</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-  <option value="21">21</option>
-  <option value="22">22</option>
-  <option value="23">23</option>
-  <option value="24">24</option>
-  <option value="25">25</option>
-  <option value="26">26</option>
-  <option value="27">27</option>
-  <option value="28">28</option>
-  <option value="29">29</option>
-  <option value="30">30</option>
+  <option value=" ">select the buisness</option>
+  <?php 
+        session_start();
+        $get_user = $_SESSION['username'];
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "admin";
+
+// Create connection
+        $conn = mysqli_connect($servername,$username,$password,$dbname);
+
+// Check connection
+       if (!$conn) {
+         die("Connection failed: " . mysqli_connect_error());
+         }
+        $records = mysqli_query($conn, "SELECT `id`, `name`, `addess`, `city`, `max-capacity`, `category`, `user-name`, `real-time`
+		FROM `shops` WHERE 1");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['id'] ."'>" .$data['id'].">".$data['name']."</option>";  // displaying data in option menu
+        }	
+    ?>  
   
   </select>
 </form>
+<?
+mysqli_close($conn);
+?>
+<div id="divik"><p align="center" style='font-family:Baumans'><button id="gm" type="button" ><i class="fas fa-map-marked-alt"></i>  map</button></p>
+<p align="center" style='font-family:Baumans'><iframe style="display:none" id="if3" src="maps.php" height="400" width="500" ></iframe></p></div>
+<br><br><br>
 
 
-<div id="check"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
-
-
-
-<button id="b1" type="button" onclick="loadDoca()">check out</button>
-
-
-<div id="checkO"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
 <script>
+$(document).ready(function(){
+  $("#gm").click(function(){
+	$("#if3").toggle();  
+ });
+});
+function displayTime() {
+   let date = new Date();
+   let time = date.toLocaleTimeString();
+   document.getElementById('clock').textContent = time;
+}
+
+const createClock = setInterval(displayTime, 1000);
+
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
@@ -389,21 +410,68 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
   document.body.style.backgroundColor = "lightgreen";
 }
+var stats = localStorage.getItem("status");
+if(stats!==null){
+	$(document).ready(function(){
+	  $("#b1").css('display', 'inline-block');
+	  $("#f1").hide();
+	  $(".checkbutton").hide();
+	  alert("welcome back,if you got out the buisness please check out");
+	});
+}
+$(document).on('click', '.checkbutton', function () {
+    $("#b1").css('display', 'inline-block');
+    $('.checkbutton').hide();
+	$("#f1").hide();
+	localStorage.setItem("status", true);
+	if($("#f4").val()!=" ")
+	setTimeout(loadDoc($("#f4").val()),2000);
+    if($("#f5").val()!=" ")
+	setTimeout(loadDoc2($("#f5").val()),2000);
+	
+});
 
 
 $(document).ready(function(){
   $("#b1").click(function(){
     $(this).hide();
+	$('.checkbutton').show();
+	localStorage.removeItem("status");
 	$("#f1").show();
-	
+	if($("#f4").val()!=" "){
+	setTimeout(loadDoc($("#f4").val()), 3000);}
+	 if($("#f5").val()!=" "){
+	setTimeout(loadDoc2($("#f5").val()), 3000);}
   });
 });
+
+
 $(document).ready(function(){
   $("#f1").change(function(){
+    if($("#f1").val()==" ") return; 
+	else{
+    localStorage.setItem("status", true);
     alert("now your in!, please don't forget to check out as well!");
 	$(this).hide();
-	$("#b1").show();
+	$("#b1").css('display', 'inline-block');
+	if($("#f4").val()!=" ")
+	setTimeout(loadDoc($("#f4").val()), 2500);
+    if($("#f5").val()!=" ")
+	setTimeout(loadDoc2($("#f5").val()), 2500);
+	}
   });
+});
+
+$(document).ready(function(){
+  $("#f4").change(function(){
+	$("#f5").val(" ");  
+ });
+});
+
+$(document).ready(function(){
+  $("#f5").change(function(){
+	$("#f4").val(" ");  
+ });
 });
 
 function loadDoc(str) {
@@ -422,9 +490,14 @@ function loadDoc(str) {
   xhttp.open("GET", "demo_get.php?q="+str, true);
   xhttp.send();
   }
+  
+  
+  
 }
 
+
 function loadDoc2(str) {
+ 
   if(str==" "){
     document.getElementById("demo").innerHTML = " ";
     return;
@@ -440,11 +513,13 @@ function loadDoc2(str) {
   xhttp.open("GET", "demo2_get.php?q="+str, true);
   xhttp.send();
   }
+  
+  
 }
 
 function loadDocs(str) {
   if(str==" "){
-    document.getElementById("demo").innerHTML = " ";
+    
     return;
 	}
 	else{
@@ -458,6 +533,7 @@ function loadDocs(str) {
   xhttp.open("GET", "Client-check-in.php?q="+str, true);
   xhttp.send();
   }
+  
 }
 function loadDoca() {
   
@@ -472,6 +548,14 @@ function loadDoca() {
   xhttp.send();
   
 }
+
+$(document).ready(function() {
+    $('.checkbutton').click(function() {
+	 $("#b1").show();
+     $('.checkbutton').hide();
+	 
+    });
+});
 </script>
 
 </body>

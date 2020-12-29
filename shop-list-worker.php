@@ -45,6 +45,7 @@ only screen and (max-width: 760px),
 		display: block; 
 	}
 	
+	/* Hide table headers (but not display: none;, for accessibility) */
 	th{display:none;}
 	
 	tr { border: 1px solid #111; }
@@ -71,7 +72,7 @@ only screen and (max-width: 760px),
 	/*
 	Label the data
 	*/
-		td:nth-of-type(1):before { content: "id:"; }
+  td:nth-of-type(1):before { content: "id:"; }
 	td:nth-of-type(2):before { content: "name:"; }
 	td:nth-of-type(3):before { content: "address:"; }
   td:nth-of-type(4):before { content: "opening hours:"; }
@@ -83,9 +84,7 @@ only screen and (max-width: 760px),
 	td:nth-of-type(10):before { content: "occupation(%):"; }
 	td:nth-of-type(11):before { content: "check in:"; }
 	
-	
 }
-
 </style>
 </head>
 <body>
@@ -97,7 +96,8 @@ function check_occupation($real_time,$max_capacity) {
   $sum= (100*$real_time) / $max_capacity;
   return $sum;
 }
-
+$get_shop=$_SESSION["workerBuisness"];
+$get_id = $_SESSION["shopID"];
 $get_user=$_SESSION['username'];
 $servername = "localhost";
 $username = "root";
@@ -111,8 +111,9 @@ $conn = mysqli_connect($servername, $username, $password,$dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
+$sql="SELECT `id`, `name`, `address`, `city`, `max-capacity`, `category`, `user-name`,`real-time`, TIME_FORMAT(`opening`, '%h:%i%p') `opening`,TIME_FORMAT(`closing`, '%h:%i%p') `closing` FROM `shops` WHERE `id`='$get_id'";
 
-$sql="SELECT `id`, `name`, `address`, `city`, `max-capacity`, `category`, `user-name`,`real-time`, TIME_FORMAT(`opening`, '%h:%i%p') `opening`,TIME_FORMAT(`closing`, '%h:%i%p') `closing` FROM `shops` WHERE `user-name`='$get_user'";
+
 
 if (mysqli_query($conn, $sql)) {
   echo "<h2>shop list!<h2>";
@@ -137,7 +138,6 @@ echo "<table>
 <th>external line</th>
 <th>occupation(%)</th>
 <th>check in</th>
-
 </tr>";
 if($_SESSION['checked_in']!="yes"){
 while($row = mysqli_fetch_array($result)) {
@@ -159,6 +159,8 @@ while($row = mysqli_fetch_array($result)) {
   if(($row['real-time']-$row['max-capacity'])<0){$line=0;}
   echo "<td>" . $line . "</td>";
   
+  
+  
   if ($int_cast >= "0" && $int_cast < "35") {
   echo "<td>" . $int_cast , "% -A lot of space <i style='font-size: 24px; color: green;' class='fas fa-check-square'></i> " . "</td>";
   }
@@ -171,15 +173,13 @@ while($row = mysqli_fetch_array($result)) {
       else if ($int_cast >= "100") {
   echo "<td>" . $int_cast , "% -Arrival is not recommended <i style='font-size: 24px; color: red;' class='fas fa-ban'></i>" . "</td>";
   }
-   echo "<td><button onclick='loadDoci(this.value)' class='checkbutton' name='subject' value=".$row['id'].">check in:".$row['id']."</button></td>";
-
-  
+   echo "<td><button onclick='loadDoca()' class='checkbutton' name='subject' value=".$row['id'].">check in:".$row['id']."</button></td>";
   echo "</tr>";
   }
 }
 else {
 while($row = mysqli_fetch_array($result)) {
-   $occupation = check_occupation($row['real-time'],$row['max-capacity']);
+  $occupation = check_occupation($row['real-time'],$row['max-capacity']);
   $int_cast = (int)$occupation;
   $real=$row['max-capacity'];
   $line=$row['real-time']-$real;
@@ -187,15 +187,16 @@ while($row = mysqli_fetch_array($result)) {
   echo "<td>" . $row['id'] . "</td>";
   echo "<td>" . $row['name'] . "</td>";
   echo "<td>" . $row['address'] . "</td>";
-   echo "<td>".$row['opening']."<br>to<br>".$row['closing']."</td>";
+  echo "<td>".$row['opening']."<br>to<br>".$row['closing']."</td>";
   echo "<td>" . $row['city'] . "</td>";
   echo "<td>" . $row['max-capacity'] . "</td>";
   echo "<td>" . $row['category'] . "</td>";
+  
   if($row['real-time']>$real){ echo "<td>" . $real . "</td>";}
   else{ echo "<td>" . $row['real-time'] . "</td>";}
-  
+ 
   if(($row['real-time']-$row['max-capacity'])<0){$line=0;}
-  echo "<td>" . $line . "</td>";
+  echo "<td>" . $line . "</td>"; 
   
   if ($int_cast >= "0" && $int_cast < "35") {
   echo "<td>" . $int_cast , "% -A lot of space <i style='font-size: 24px; color: green;' class='fas fa-check-square'></i> " . "</td>";
@@ -210,7 +211,6 @@ while($row = mysqli_fetch_array($result)) {
   echo "<td>" . $int_cast , "% -Arrival is not recommended <i style='font-size: 24px; color: red;' class='fas fa-ban'></i>" . "</td>";
   }
    echo "<td><i style='font-size: 32px' class='fas fa-sign-in-alt'></i></td>";
-   
   echo "</tr>";
   }	
 	

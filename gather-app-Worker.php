@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,7 +90,7 @@ body {
    
 }
 p{
-    
+   
    font-size: 34px; 
 }
 form{
@@ -123,32 +124,32 @@ input[type=button], input[type=submit], input[type=reset] {
    border-radius: 4px;
    margin-left:700px;
 }
-#b1{ background-color: #3CBC8D;
+#b1{ background-color: tomato;
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 16px 128px;;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: auto;
   cursor: pointer;
   border: 2px solid grey;
    border-radius: 4px;
    align:center;
-   margin-left:680px;
    display:none;
    }
   
   #c1,#c12{ background-color: #3CBC8D;
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 16px 128px;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: auto;
   cursor: pointer;
   border: 2px solid grey;
    border-radius: 4px;
-   align:center;
-   ;
-   display:inline-block;}
+  
+  
+   display:inline-block;
+   }
    
 select {
 display:block;
@@ -166,7 +167,7 @@ text-align:center;
 }
 li a{width:91%}
 h1 {
-    margin-top:200px;
+    margin-top:10px;
  text-align:center;
   font-family: "Sofia";
   font-size:35px;
@@ -209,7 +210,7 @@ h1 {
 }
 #main {
   transition: margin-left .5s;
-  padding:4px;
+  padding: 4px;
 }
 div.sticky {
  
@@ -221,12 +222,99 @@ div.sticky {
   border-radius:4px;
   
 }
+table #center {
+	
+  margin-left: auto; 
+  margin-right: auto;
+   width:25%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+td {
+   text-align:center;
+   height:5px;
+  
+}
+td:hover {background-color: #f5f5f5;}
+
+#center td, #center th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.button32 {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button32:hover {background-color: #3e8e41}
+
+.button32:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 
 </style>
 </head>
 <body>
-<ul>
 
+<?php
+session_start();
+$get_user=$_SESSION['username'];
+
+
+
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "admin";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,$dbname);
+
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql="SELECT `id`, `first-name`, `last-name`, `buisness-name`, `user-name`, `password` ,`aproove` FROM `workers` WHERE `user-name` = '$get_user'";
+
+
+
+
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+	$row = mysqli_fetch_assoc($result);
+  if($row['aproove']=="no"){header("Location:before_aprooved.php");}
+  $q=$row["buisness-name"];
+  $_SESSION["shopID"]=$q;
+	
+}
+$sql2="SELECT `id`, `name`, `address`, `city`, `max-capacity`, `category`, `user-name`, `real-time` FROM `shops` WHERE  `id`='$q'";
+$result = mysqli_query($con,$sql2);
+if (mysqli_num_rows($result) > 0) {
+	$row = mysqli_fetch_assoc($result);
+  $_SESSION["workerBuisness"]=$row["name"];
+  
+	
+}
+
+
+
+?>
+
+
+<ul>
   <li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
@@ -245,7 +333,7 @@ div.sticky {
 </ul>
 
 <div id="mySidenav" class="sidenav">
-<a href="#"><i class="fas fa-user"></i><? echo $_SESSION['username']."<br>";echo "working at :".$_SESSION["workerBuisness"];  if($_SESSION['insideB']!=" "){
+ <a href="#"><i class="fas fa-user"></i><? echo $_SESSION['username']."<br>";echo "working at :".$_SESSION["workerBuisness"];  if($_SESSION['insideB']!=" "){
 	 echo "<br>youre in:".$_SESSION['insideB'];
  }
  ?> </a>
@@ -266,72 +354,40 @@ div.sticky {
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
 <h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
+<?php  session_start();if (isset($_SESSION['detailchanged'])&&$_SESSION['detailshow']==1)
+  {echo "<p id='foo4'>you have successfully changed your details :".$_SESSION['username'] . "!</p><br>";
+  $_SESSION['detailshow']--;
+  } ?>
+
+<p align="center" id='p41' style='font-family:Baumans;display:none;'>guests counting</p>
+
+<p id='p40' align="center" style='display:none'><button class="button32" type="button" onclick="loadDocim('2')"><i class="fas fa-user-plus"></i></button>
+<button class="button32" type="button" onclick="loadDocim('-')"><i class="fas fa-user-minus"></i></button></p>
+
+<div id="checkas"><b style="font-family:Baumans;font-size:24px;"></b></div>
+
+    <p align="center"> <button id="b1" type="button" onclick="loadDoca2()">check out from the shop</button></td>
+    <button id="c1" onclick="loadDoca()">check-in to shop</button></td> </p>
+  
+
+<div id="check"><b style="font-family:Baumans;font-size:24px;"></b></div>
+<div id="check1"><b style="font-family:Baumans;font-size:24px;"></b></div>
+
+
+<br><br><br>
 
 
 
 
-<?php
-session_start();
-$get_user=$_SESSION['username'];
-$getBname=$_SESSION["workerBuisness"];
 
-echo "<h2 style='font-family:Baumans'>hello:--".$get_user."--for manual insert of people on buisness: ".$_SESSION["workerBuisness"]."</h2>"; 
-
-
+<?
+mysqli_close($conn);
 ?>
 
-<select id="f1" name="id" onchange="loadDocs(this.value)">
-  <option value="">:</option>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="16">16</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-  <option value="21">21</option>
-  <option value="22">22</option>
-  <option value="23">23</option>
-  <option value="24">24</option>
-  <option value="25">25</option>
-  <option value="26">26</option>
-  <option value="27">27</option>
-  <option value="28">28</option>
-  <option value="29">29</option>
-  <option value="30">30</option>
-  <option value="31">31</option>
-  <option value="32">32</option>
-  <option value="33">33</option>
-  <option value="34">34</option>
-  <option value="35">35</option>
-  <option value="36">36</option>
-  <option value="37">37</option>
-  <option value="38">38</option>
-  <option value="39">39</option>
-  <option value="40">40</option>
-  
-  </select>
 
-<div id="demo"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
-
-
-<p align="center"><button id="c12" onclick="document.location='gather-app-Worker.php'">go back to worker app</button></p>
-
-</body>
 <script>
+
+
 function displayTime() {
    let date = new Date();
    let time = date.toLocaleTimeString();
@@ -351,24 +407,121 @@ function closeNav() {
   document.body.style.backgroundColor = "lightgreen";
 }
 
-function loadDocs(str) {
+var stats = localStorage.getItem("status_w");
+if(stats!==null){
+	$(document).ready(function(){
+	  $("#b1").show();
+	  $("#c1").hide();
+	  $('#p40').show();
+	  $('#p41').show();
+	  alert("welcome back,if you got out the buisness please check out");
+	});
+}
+
+$(document).ready(function(){
+  $("#c1").click(function(){
+    $(this).hide();
+	$("#b1").show();
+	$('#p40').show();
+	$('#p41').show();
+	alert("now your in!, please don't forget to check out as well!");
+	localStorage.setItem("status_w", true);
+	setTimeout(loadDocas(), 500);
+  });
+});
+
+$(document).ready(function(){
+  $("#b1").click(function(){
+    $(this).hide();
+	$("#c1").show();
+	$('#p40').hide();
+	$('#p41').hide();
+	localStorage.removeItem("status_w");
+	setTimeout(loadDocas(), 500);
+	
+  });
+});
+$(document).on('click', '.checkbutton', function () {
+    $("#b1").show();
+    $('.checkbutton').hide();
+	$("#c1").hide();
+	localStorage.setItem("status_w", true);
+	setTimeout(loadDocas(), 500);
+	$('#p40').show();
+	$('#p41').show();
+	
+});
+$(document).ready(function(){
+setTimeout(loadDocas(), 500);	
+	
+});
+function loadDocas() {
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("check1").innerHTML = this.responseText;
+    }
+  };
+ 
+  xhttp.open("GET", "shop-list-worker.php", true);
+  xhttp.send();
+  
+}
+function loadDoca() {
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("check").innerHTML = this.responseText;
+    }
+  };
+ 
+  xhttp.open("GET", "gather-app-Worker_action.php", true);
+  xhttp.send();
+  
+}
+function loadDoca2() {
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("check").innerHTML = this.responseText;
+    }
+  };
+ 
+  xhttp.open("GET", "gather-app-Worker_action2.php", true);
+  xhttp.send();
+  
+}
+
+function loadDocim(str) {
   if(str==" "){
-    document.getElementById("demo").innerHTML = " ";
+    
     return;
 	}
 	else{
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML = this.responseText;
+      document.getElementById("checkas").innerHTML = this.responseText;
     }
   };
  
-  xhttp.open("GET", "manual.php?q="+str, true);
+  xhttp.open("GET", "worker-guest_check.php?q="+str, true);
   xhttp.send();
   }
 }
+
+$(document).on('click', '.button32', function () {
+setTimeout(loadDocas(), 500);
+setTimeout(function () {document.getElementById('foo').style.display='none'},2200);
+	
+});
+
 </script>
+
+</body>
 
 </html>
 

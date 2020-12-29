@@ -72,7 +72,7 @@ li.dropdown {
 
 
 h1{
-    margin-top:100px;
+    margin-top:10px;
  text-align:center;
   font-family: "Sofia";
   font-size: 48px;
@@ -84,34 +84,35 @@ body {
   margin:0;
   background-color:lightgreen;
   font-family:'Be Vietnam';
-  text-align:left;
-  
-   
 }
 p{
     
-   font-size: 34px; 
+   font-size: 20px; 
+   text-align:center;
 }
-form{
+#f1{
+	display: none;
     margin:auto;
-    padding:20px 250px;
     text-align:center; 
+	
+	
 }
-input[type=text],input[type=password] {
+input[type=text] ,input[type=password]{
   border: 2px solid grey;
    background-color: #3CBC8D;
   color: white;
   border-radius: 4px;
 }
-input[type=text],input[type=password]:focus {
+input[type=text]:focus {
   border: 3px solid #555;
 }
 input[type=submit]{
 
 border: 2px solid grey;
   border-radius: 4px;
+  align:center;
 }
-input[type=button], input[type=submit], input[type=reset] {
+input[type=button], input[type=submit], input[type=reset] ,input[type=list]{
   background-color: #3CBC8D;
   border: none;
   color: white;
@@ -120,36 +121,18 @@ input[type=button], input[type=submit], input[type=reset] {
   margin: 4px 2px;
   cursor: pointer;
   border: 2px solid grey;
-   border-radius: 4px;
-   margin-left:700px;
 }
-#b1{ background-color: #3CBC8D;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-  border: 2px solid grey;
-   border-radius: 4px;
-   align:center;
-   margin-left:680px;
-   display:none;
-   }
+#cb {
+display:block;
   
-  #c1,#c12{ background-color: #3CBC8D;
+  margin:auto;
+  padding: 16px 20px;
   border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-  border: 2px solid grey;
-   border-radius: 4px;
-   align:center;
-   ;
-   display:inline-block;}
-   
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+
+
 select {
 display:block;
   
@@ -172,9 +155,26 @@ h1 {
   font-size:35px;
   }
 }
-#demo,#check,#checkO{text-align:center;}
-
-.sidenav {
+#myBtn,#myBtn1{
+	display:block;
+	background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: auto;
+  cursor: pointer;
+  border: 2px solid grey;
+}
+#c1,#c2,#c3,#c9,c10{border: 2px solid grey;
+   background-color: #3CBC8D;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 32px;
+  align:center;
+  }
+  
+  .sidenav {
   height: 100%;
   width: 0;
   position: fixed;
@@ -209,7 +209,26 @@ h1 {
 }
 #main {
   transition: margin-left .5s;
-  padding:4px;
+  padding: 4px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, td, th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+th {text-align: left;}
+
+
+	#f1{
+	display: none;
+    margin:auto;
+    text-align:center; 
+	
 }
 div.sticky {
  
@@ -226,7 +245,6 @@ div.sticky {
 </head>
 <body>
 <ul>
-
   <li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
@@ -238,22 +256,22 @@ div.sticky {
   </li>
   <li><a href="gather-contact.htm"><i class="fas fa-paper-plane"></i> Contact</a></li>
   <li><a href="gather-about.htm"><i class="fas fa-info-circle"></i> About</a></li>
-    <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
-	 <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+  <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
+   <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
   {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
-  
 </ul>
 
 <div id="mySidenav" class="sidenav">
-<a href="#"><i class="fas fa-user"></i><? echo $_SESSION['username']."<br>";echo "working at :".$_SESSION["workerBuisness"];  if($_SESSION['insideB']!=" "){
+<a href="#"><i class="fas fa-user"></i><? session_start(); echo $_SESSION['username'];
+if($_SESSION['insideB']!=" "){
 	 echo "<br>youre in:".$_SESSION['insideB'];
- }
- ?> </a>
+ }?> </a>
  <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
- <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update</a>
+ <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update </a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
-  <a href="settings_worker.php"><i class="fas fa-cogs"></i> settings</a>
+  <a href="settings_worker.php"><i class="fas fa-cogs"></i>settings</a>
+   <a href="rate_us^worker.php"><i class="fas fa-grin-stars"></i> rate us</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
 
@@ -267,71 +285,76 @@ div.sticky {
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
 <h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
 
+<p>hello dear manager,in order to change your private details please enter new</p>
 
 
 
-<?php
-session_start();
-$get_user=$_SESSION['username'];
-$getBname=$_SESSION["workerBuisness"];
+<form id="f1" action="settings_worker_action.php" target="_self" method="post" autocomplete="off">
 
-echo "<h2 style='font-family:Baumans'>hello:--".$get_user."--for manual insert of people on buisness: ".$_SESSION["workerBuisness"]."</h2>"; 
+<label for="first-name">first-name:</label><br>
+<input type="text" id="first-name" name="first-name" required value=""><br> 
+
+<label for="last-name">last-name:</label><br>
+<input type="text" id="last-name" name="last-name" required value=""><br> 
+
+  
+<label for="user-name">user-name:</label><br>
+<input type="text" id="user-name" name="user-name" required value=""><br>
+  
+  
+<label for="password">password:</label><br>
+<input type="password" id="password" name="password" required value=""><br>
+
+<label for="password-confirm">password-confirm:</label><br>
+<input type="password" id="password-confirm" name="password-confirm" required value=""><br>
 
 
+<input type="submit" value="Submit">  
+    
+ 
+</form>
+
+<p align=center><button id="c1">to change your private details</button></p> 
+
+<p align=center><button id="c9">to change your buisness that you work for</button></p> 
+<div id="checkas"><b style="font-family:Baumans;font-size:24px;"></b></div>
+
+<p align=center><input list="ID" style="display:none" name="ID" id="cb" required value="" onchange="loadDocim(this.value)">
+  <datalist id="ID">
+ <?php 
+        session_start();
+        $get_user = $_SESSION['username'];
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "admin";
+
+// Create connection
+        $conn = mysqli_connect($servername,$username,$password,$dbname);
+
+// Check connection
+       if (!$conn) {
+         die("Connection failed: " . mysqli_connect_error());
+         }
+        $records = mysqli_query($conn, "SELECT `id`, `name`, `address`, `city`, `max-capacity`, `category`, `user-name`, `real-time`
+		FROM `shops` WHERE 1");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['id'] ."'>" .$data['id'].">".$data['name']."</option>";  // displaying data in option menu
+        }	
+    ?>  
+  
+  </datalist><br>
+  </p>
+<?
+mysqli_close($conn);
 ?>
 
-<select id="f1" name="id" onchange="loadDocs(this.value)">
-  <option value="">:</option>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="16">16</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-  <option value="21">21</option>
-  <option value="22">22</option>
-  <option value="23">23</option>
-  <option value="24">24</option>
-  <option value="25">25</option>
-  <option value="26">26</option>
-  <option value="27">27</option>
-  <option value="28">28</option>
-  <option value="29">29</option>
-  <option value="30">30</option>
-  <option value="31">31</option>
-  <option value="32">32</option>
-  <option value="33">33</option>
-  <option value="34">34</option>
-  <option value="35">35</option>
-  <option value="36">36</option>
-  <option value="37">37</option>
-  <option value="38">38</option>
-  <option value="39">39</option>
-  <option value="40">40</option>
-  
-  </select>
 
-<div id="demo"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
-
-
-<p align="center"><button id="c12" onclick="document.location='gather-app-Worker.php'">go back to worker app</button></p>
 
 </body>
-<script>
+<script> 
 function displayTime() {
    let date = new Date();
    let time = date.toLocaleTimeString();
@@ -350,25 +373,36 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
   document.body.style.backgroundColor = "lightgreen";
 }
+$(document).ready(function(){
+  $("#c1").click(function(){
+	$("#f1").toggle();
+  });
+});
+$(document).ready(function(){
+  $("#c9").click(function(){
+	$("#cb").toggle();
+  });
+});
 
-function loadDocs(str) {
+function loadDocim(str) {
   if(str==" "){
-    document.getElementById("demo").innerHTML = " ";
+    
     return;
 	}
 	else{
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML = this.responseText;
+      document.getElementById("checkas").innerHTML = this.responseText;
     }
   };
  
-  xhttp.open("GET", "manual.php?q="+str, true);
+  xhttp.open("GET", "worker_shop_change.php?q="+str, true);
   xhttp.send();
   }
+  
 }
+
+
 </script>
-
 </html>
-
