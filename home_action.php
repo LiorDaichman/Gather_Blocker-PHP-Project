@@ -130,7 +130,7 @@ input[type=button], input[type=submit], input[type=reset] {
    border-radius: 4px;
    align:center;
    margin-left:700px;
-   display:none;
+   
    }
    
 select {
@@ -202,7 +202,7 @@ $get_auto = $_POST['duty'];
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "gather-blocker";
+$dbname = "admin";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$dbname);
@@ -278,7 +278,7 @@ elseif($get_auto=='Manager'){
 			 if($row["password"]==$get_pas){
 			    echo "password ok <br>";
 				 $_SESSION['loggedin'] = true;
-                 $_SESSION['username'] = $get_user;
+               $_SESSION['username'] = $get_user;
 				 $_SESSION['duty']='Worker';
 				header("Location:gather-app-Worker.php");
 			 }
