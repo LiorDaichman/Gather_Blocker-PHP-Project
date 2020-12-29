@@ -8,7 +8,7 @@
 <link href='https://fonts.googleapis.com/css?family=Black Han Sans' rel='stylesheet'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <link href='https://fonts.googleapis.com/css?family=Be Vietnam' rel='stylesheet'>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 ul {
   list-style-type: none;
@@ -72,7 +72,7 @@ li.dropdown {
 
 
 h1{
-    margin-top:100px;
+    margin-top:10px;
  text-align:center;
   font-family: "Sofia";
   font-size: 48px;
@@ -86,31 +86,33 @@ body {
   font-family:'Be Vietnam';
 }
 p{
-	text-align:center;
     
-   font-size: 34px; 
+   font-size: 20px; 
+   text-align:center;
 }
-form{
+#f1{
+	display: none;
     margin:auto;
-    padding:20px 250px;
     text-align:center; 
+	
+	
 }
-input[type=text],input[type=password] {
+input[type=text] ,input[type=password]{
   border: 2px solid grey;
    background-color: #3CBC8D;
   color: white;
   border-radius: 4px;
- 
 }
-input[type=text],input[type=password]:focus {
+input[type=text]:focus {
   border: 3px solid #555;
 }
 input[type=submit]{
 
 border: 2px solid grey;
   border-radius: 4px;
+  align:center;
 }
-input[type=button], input[type=submit], input[type=reset]{
+input[type=button], input[type=submit], input[type=reset] ,input[type=list]{
   background-color: #3CBC8D;
   border: none;
   color: white;
@@ -120,6 +122,16 @@ input[type=button], input[type=submit], input[type=reset]{
   cursor: pointer;
   border: 2px solid grey;
 }
+#cb {
+display:block;
+  
+  margin:auto;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+
 
 select {
 display:block;
@@ -143,25 +155,66 @@ h1 {
   font-size:35px;
   }
 }
-
-#b1{ background-color: #3CBC8D;
+#myBtn,#myBtn1{
+	display:block;
+	background-color: #3CBC8D;
   border: none;
   color: white;
   padding: 16px 32px;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: auto;
   cursor: pointer;
   border: 2px solid grey;
-   border-radius: 4px;
-   align:center;
-   margin-left:700px;
-   display:inline-block;}
-   
-   #demo{text-align:center;}
-   table {
+}
+#c1,#c2,#c3,#c9,c10{border: 2px solid grey;
+   background-color: #3CBC8D;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 32px;
+  align:center;
+  }
+  
+  .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+#main {
+  transition: margin-left .5s;
+  padding: 4px;
+}
+table {
   width: 100%;
   border-collapse: collapse;
-    }
+}
 
 table, td, th {
   border: 1px solid black;
@@ -169,20 +222,30 @@ table, td, th {
 }
 
 th {text-align: left;}
-#c33{border: 2px solid grey;
-   background-color: #3CBC8D;
-  color: white;
-  border-radius: 4px;
-  padding: 4px 16px;}
+
+
+	#f1{
+	display: none;
+    margin:auto;
+    text-align:center; 
+	
+}
+div.sticky {
+ 
+  position: sticky;
+  top: 0;
+  padding: 2px;
+  background-color:Moccasin;
+  border: 2px solid Moccasin;
+  border-radius:4px;
+  
+}
 
 </style>
 </head>
 <body>
-
-
-
 <ul>
-  <li><a href="gather-home.php" ><i class="fa fa-home"></i> Home</a></li>
+  <li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
     <div class="dropdown-content">
@@ -193,27 +256,40 @@ th {text-align: left;}
   </li>
   <li><a href="gather-contact.htm"><i class="fas fa-paper-plane"></i> Contact</a></li>
   <li><a href="gather-about.htm"><i class="fas fa-info-circle"></i> About</a></li>
+  <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
+   <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+  {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
 </ul>
+
+<div id="mySidenav" class="sidenav">
+<a href="#"><i class="fas fa-user"></i><? session_start(); echo $_SESSION['username'];
+if($_SESSION['insideB']!=" "){
+	 echo "<br>youre in:".$_SESSION['insideB'];
+ }?> </a>
+ <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
+ <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update </a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
+  <a href="settings_worker.php"><i class="fas fa-cogs"></i>settings</a>
+   <a href="rate_us^worker.php"><i class="fas fa-grin-stars"></i> rate us</a>
+  <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
+</div>
+
+<div class="sticky"><b id="clock" style="font-family:Baumans;font-size:48px; float:right;"></b>
+
+<div id="main">
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span></div>
+
+</div>
 
 <h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
 <h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
 
-<?php
-session_start();
-echo $_SESSION["WpasswordErr"];
-echo $_SESSION["WuserErr"];
+<p>hello dear manager,in order to change your private details please enter new</p>
 
 
-?>
 
-
-<p>hello dear worker,please enter your private details</p>
-
-<button id="b1" type="button" onclick="loadshopsDoc()">shop-list</button>
-
-<div id="demo"><b style="font-family:Baumans;font-size:24px;">click the shop list button in order to choose the buisness you work for</b></div>
-
-<form action="Worker_action.php"target="_self" method="post" autocomplete="off">
+<form id="f1" action="settings_worker_action.php" target="_self" method="post" autocomplete="off">
 
 <label for="first-name">first-name:</label><br>
 <input type="text" id="first-name" name="first-name" required value=""><br> 
@@ -231,15 +307,21 @@ echo $_SESSION["WuserErr"];
 
 <label for="password-confirm">password-confirm:</label><br>
 <input type="password" id="password-confirm" name="password-confirm" required value=""><br>
- 
-<b style="font-family:Baumans;font-size:24px;">enter the id of the shop that you work for</b>
- 
-<label for="buisness-name"></label><br>
 
-<input list="id" id="c33" name="id" ><br>
-<datalist id="id">  
-<option value=" ">select the buisness</option>
-  <?php 
+
+<input type="submit" value="Submit">  
+    
+ 
+</form>
+
+<p align=center><button id="c1">to change your private details</button></p> 
+
+<p align=center><button id="c9">to change your buisness that you work for</button></p> 
+<div id="checkas"><b style="font-family:Baumans;font-size:24px;"></b></div>
+
+<p align=center><input list="ID" style="display:none" name="ID" id="cb" required value="" onchange="loadDocim(this.value)">
+  <datalist id="ID">
+ <?php 
         session_start();
         $get_user = $_SESSION['username'];
         $servername = "localhost";
@@ -262,42 +344,65 @@ echo $_SESSION["WuserErr"];
             echo "<option value='". $data['id'] ."'>" .$data['id'].">".$data['name']."</option>";  // displaying data in option menu
         }	
     ?>  
-     
-      </datalist >
-
-
-
-<input type="submit" value="Submit">  
-    
- 
-</form>
+  
+  </datalist><br>
+  </p>
 <?
 mysqli_close($conn);
 ?>
 
-<script>
 
-function loadshopsDoc() {
-  
+
+</body>
+<script> 
+function displayTime() {
+   let date = new Date();
+   let time = date.toLocaleTimeString();
+   document.getElementById('clock').textContent = time;
+}
+
+const createClock = setInterval(displayTime, 1000);
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+  document.body.style.backgroundColor = "lightgreen";
+}
+$(document).ready(function(){
+  $("#c1").click(function(){
+	$("#f1").toggle();
+  });
+});
+$(document).ready(function(){
+  $("#c9").click(function(){
+	$("#cb").toggle();
+  });
+});
+
+function loadDocim(str) {
+  if(str==" "){
+    
+    return;
+	}
+	else{
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML = this.responseText;
+      document.getElementById("checkas").innerHTML = this.responseText;
     }
   };
  
-  xhttp.open("GET", "Worker-sign-shop.php", true);
+  xhttp.open("GET", "worker_shop_change.php?q="+str, true);
   xhttp.send();
+  }
   
 }
 
 
 </script>
-
- 
-
-
-
-
-</body>
 </html>

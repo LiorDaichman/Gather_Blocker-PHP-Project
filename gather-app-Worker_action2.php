@@ -8,7 +8,7 @@ $bName=$_SESSION['workerBuisness'];
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "gather-blocker";
+$dbname = "admin";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$dbname);

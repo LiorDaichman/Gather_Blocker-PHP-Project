@@ -147,7 +147,7 @@ input[type=button], input[type=submit], input[type=reset] {
   border: 2px solid grey;
    border-radius: 4px;
    align:center;
-   margin-left:680px;
+   ;
    display:inline-block;}
    
 select {
@@ -253,7 +253,7 @@ div.sticky {
  <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
-  <a href="#"><i class="fas fa-cogs"></i> settings</a>
+  <a href="settings_worker.php"><i class="fas fa-cogs"></i> settings</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
 
@@ -328,7 +328,7 @@ echo "<h2 style='font-family:Baumans'>hello:--".$get_user."--for manual insert o
 <div id="demo"><b style="font-family:Baumans;font-size:24px;">.  .  .</b></div>
 
 
-<button id="c12" onclick="document.location='gather-app-Worker.php'">go back to worker app</button>
+<p align="center"><button id="c12" onclick="document.location='gather-app-Worker.php'">go back to worker app</button></p>
 
 </body>
 <script>

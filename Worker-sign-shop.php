@@ -8,7 +8,7 @@ $get_user=$_SESSION['username'];
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "gather-blocker";
+$dbname = "admin";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$dbname);
@@ -18,7 +18,7 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql="SELECT `id`, `name`, `street`, `city`, `max-capacity`, `category`, `user-name`,`real-time` FROM `shops` WHERE 1";
+$sql="SELECT `id`, `name`, `address`, `city`, `max-capacity`, `category`, `user-name`,`real-time` FROM `shops` WHERE 1";
 
 if (mysqli_query($conn, $sql)) {
   echo "<h2>shop list!<h2>";
@@ -32,7 +32,7 @@ if (mysqli_num_rows($result) > 0) {
           <tr>
 		  <th>id</th>
           <th>Shop-name</th>
-		  <th>Street</th>
+		  <th>address</th>
 		  <th>City</th>
 		  <th>max-capacity</th>
 		  <th>Category</th>
@@ -43,7 +43,7 @@ if (mysqli_num_rows($result) > 0) {
 	    echo "<tr>";
 		echo "<td>" . $row['id'] . "</td>";
 		echo "<td>" . $row['name'] . "</td>";
-		echo "<td>" . $row['street'] . "</td>";
+		echo "<td>" . $row['address'] . "</td>";
 		echo "<td>" . $row['city'] . "</td>";
 		echo "<td>" . $row['max-capacity'] . "</td>";
 		echo "<td>" . $row['category'] . "</td>";
