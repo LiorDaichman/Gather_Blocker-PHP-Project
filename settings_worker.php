@@ -282,8 +282,8 @@ if($_SESSION['insideB']!=" "){
 
 </div>
 
-<h1><span style='font-size:10vw;'>&#9940;</span> gather blocker <span style='font-size:10vw;'>&#129298;</span></h1>
-<h2 style='font-family:Baumans'>"go out when it's safe" !</h2>
+<h1>gather blocker <br> <img src="pics/gathering.png"><br></h1>
+<h2 style='font-family:Baumans'>"go out when it's safe" !<br><br><br> 
 
 <p>hello dear manager,in order to change your private details please enter new</p>
 

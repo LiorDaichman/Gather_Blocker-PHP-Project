@@ -72,10 +72,10 @@ only screen and (max-width: 760px),
 	/*
 	Label the data
 	*/
-  td:nth-of-type(1):before { content: "id:"; }
+    td:nth-of-type(1):before { content: "id:"; }
 	td:nth-of-type(2):before { content: "name:"; }
 	td:nth-of-type(3):before { content: "address:"; }
-  td:nth-of-type(4):before { content: "opening hours:"; }
+    td:nth-of-type(4):before { content: "opening-hours:"; }
 	td:nth-of-type(5):before { content: "city:"; }
 	td:nth-of-type(6):before { content: "max-capacity:"; }
 	td:nth-of-type(7):before { content: "category:"; }
@@ -130,7 +130,7 @@ echo "<table>
 <th>id</th>
 <th>name</th>
 <th>address</th>
-<th>opening hours</th>
+<th>opening-hours</th>
 <th>city</th>
 <th>max-capacity</th>
 <th>category</th>
