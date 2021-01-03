@@ -18,7 +18,10 @@ class funcs_test extends PHPUnit_Framework_TestCase {
         $this->assertTrue( passwordCheck_confirm( "123re2w","123re2w"));
 		$this->assertFalse(passwordCheck_confirm( "78f3","123re2w" ));
     }
-	
+	public function test_check_occupation() {
+		$this->assertTrue( check_occupation( "1" ));
+		$this->assertTrue( check_occupation( "100" ));
+	}
 }
 
 
