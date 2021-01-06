@@ -274,7 +274,7 @@ if($_SESSION['insideB']!=" "){
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="gather-app-Client.php"><i class='fab fa-drupal'></i> Client-app</a>
   <a href="settings_client.php"><i class="fas fa-cogs"></i> settings</a>
-  <a href="rate_us^manager.php"><i class="fas fa-grin-stars"></i> Rate us</a>
+  <a href="rate_us^client.php"><i class="fas fa-grin-stars"></i> Rate us</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
 

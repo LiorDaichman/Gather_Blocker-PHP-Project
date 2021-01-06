@@ -129,7 +129,7 @@ input[type=button], input[type=submit], input[type=reset] {
   border: 2px solid grey;
    border-radius: 4px;
    align:center;
-   margin-left:700px;
+   
    
    }
    
