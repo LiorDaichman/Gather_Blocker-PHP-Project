@@ -117,7 +117,7 @@ input[type=button], input[type=submit], input[type=reset] {
   cursor: pointer;
   border: 2px solid grey;
    border-radius: 4px;
-   margin-left:700px;
+   
 }
 #b1{ background-color: #3CBC8D;
   border: none;
@@ -129,7 +129,7 @@ input[type=button], input[type=submit], input[type=reset] {
   border: 2px solid grey;
    border-radius: 4px;
    align:center;
-   margin-left:700px;}
+  }
    
 select {
 display:block;
