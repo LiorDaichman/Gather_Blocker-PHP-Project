@@ -28,7 +28,7 @@ $sql2="UPDATE `shops` SET `real-time`=`real-time`-1 WHERE `id`='$bName'";
 if($q=='2'){
 if (mysqli_query($conn, $sql)) {
       
-	  echo "<p align='center' id='foo' style='font-size: 24px; color:#3CBC8D;'>guest update succseed to : ".$_SESSION['insideB']."<br>
+	  echo "<p align='center' id='foo' style='font-size: 24px; color:#3CBC8D;'>guest update succseed to : ".$_SESSION['insideBM']."<br>
 	  <i class='fas fa-check-square'></i></p>";
   
 } else {
@@ -38,7 +38,7 @@ if (mysqli_query($conn, $sql)) {
 }
 else if($q=='-'){
 if (mysqli_query($conn, $sql2)) {
-       echo "<p align='center'id='foo' style='font-size: 24px; color: red;'>guest update succseed to : ".$_SESSION['insideB']."<br>
+       echo "<p align='center'id='foo' style='font-size: 24px; color: red;'>guest update succseed to : ".$_SESSION['insideBM']."<br>
 	   <i class='fas fa-check-square'></i></p>";
   
 } else {
