@@ -124,6 +124,17 @@ input[type=button], input[type=submit], input[type=reset] {
    border-radius: 4px;
    
 }
+#gm{ background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid grey;
+   border-radius: 4px;
+   align:center;
+   }
+   
 #b1{ background-color: #f4511e;
   border: none;
   color: white;
@@ -135,7 +146,16 @@ input[type=button], input[type=submit], input[type=reset] {
    align:center;
    display:none;}
    
-   
+   .checkbutton{ background-color: #3CBC8D;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid grey;
+   border-radius: 4px;
+   align:center;
+   }
   
    
 select {
@@ -213,33 +233,13 @@ div.sticky {
   border-radius:4px;
   
 }
-#gm{ background-color: #3CBC8D;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  cursor: pointer;
-  border: 2px solid grey;
-   border-radius: 4px;
-   align:center;
-   }
-   .checkbutton{ background-color: #3CBC8D;
-  border: none;
-  color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-  cursor: pointer;
-  border: 2px solid grey;
-   border-radius: 4px;
-   align:center;
-   }
 
 </style>
 
 </head>
 <body>
 <ul>
-<li><a href="gather-app-Client.php"><i class="fa fa-home"></i> Home</a></li>
+  <li><a href="gather-app-manager.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
     <div class="dropdown-content">
@@ -256,18 +256,20 @@ div.sticky {
    
 </ul>
 
+
 <div id="mySidenav" class="sidenav">
 <a href="#"><i class="fas fa-user"></i><? session_start(); echo $_SESSION['username'];
 if($_SESSION['insideB']!=" "){
 	 echo "<br>youre in:".$_SESSION['insideB'];
  }
-?> </a>
 
- <a href="#"><i class="fa fa-home"></i> Home</a>
+?> </a>
+ <a href="gather-app-manager.php"><i class="fa fa-home"></i> Home</a>
+ <a href="gather-ShopList_Manage.php" ><i  class ="fas fa-store-alt"></i>ShopList Manage</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="gather-app-Client.php"><i class='fab fa-drupal'></i> Client-app</a>
-  <a href="settings_client.php"><i class="fas fa-cogs"></i> settings</a>
-  <a href="rate_us^client.php"><i class="fas fa-grin-stars"></i> Rate us</a>
+  <a href="#"><i class='fab fa-drupal'></i> Client-app</a>
+  <a href="settings_manager.php"><i class="fas fa-cogs"></i>settings</a>
+   <a href="rate_us^manager.php"><i class="fas fa-grin-stars"></i> rate us</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
 <div class="sticky"><b id="clock" style="font-family:Baumans;font-size:48px; float:right;"></b>
@@ -276,6 +278,10 @@ if($_SESSION['insideB']!=" "){
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span></div>
 <button id="b1" type="button" onclick="loadDoca()">check out</button>
 </div>
+
+
+
+
 <h1>gather blocker <br> <img src="pics/gathering.png"><br></h1>
 <h2 style='font-family:Baumans'>"go out when it's safe" !<br><br><br> 
 
@@ -393,11 +399,9 @@ if($_SESSION['insideB']!=" "){
 <?
 mysqli_close($conn);
 ?>
-<div id="divik"><p align="center" style='font-family:Baumans'><button id="gm" type="button" ><i class="fas fa-map-marked-alt"></i>  map</button></p>
+<div id="divik"><p align="center" style='font-family:Baumans'><button id="gm" type="button" ><i class="fas fa-map-marked-alt"></i> map</button></p>
 <p align="center" style='font-family:Baumans'><iframe style="display:none" id="if3" src="maps.php" height="400" width="500" ></iframe></p></div>
 <br><br><br>
-
-
 <h2 style='font-family:Baumans'>Search</h2>
 <!-- Text input to enter the employee's name -->
 <p align=center > <i class="fas fa-search"></i> <input type="text" id="employee_name"></input><br>
@@ -438,8 +442,7 @@ $('#search_button').click(function(){
                 $.each(results, function(key, value){
                     //The name of the employee will be present
                     //in the "name" property.
-                    $('#search_results').append('<p align=center>results: <button onclick="loadDocs(this.value)" class="checkbutton" value="'
-                    +value.id+'">check in:'+value.name+'</button><br>'+value.address+'</p>');
+                    $('#search_results').append('<p align=center>'+value.id+')<button onclick="loadDocs(this.value)" class="checkbutton" value="'+value.id+'">check in:'+value.name+'</button><br>'+value.address+'</p>');
                 });
                 //If no employees match the name that was searched for, display a
                 //message saying that no results were found.
@@ -449,6 +452,7 @@ $('#search_button').click(function(){
             }
         });
     });
+
 
 
 
@@ -504,8 +508,8 @@ $(document).on('click', '.checkbutton', function () {
 $(document).ready(function(){
   $("#b1").click(function(){
     $(this).hide();
-  $('.checkbutton').show();
-  $("#search_results").show();
+    $("#search_results").show();
+	$('.checkbutton').show();
 	localStorage.removeItem("status");
 	$("#f1").show();
 	if($("#f4").val()!=" "){

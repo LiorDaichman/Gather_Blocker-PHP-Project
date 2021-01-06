@@ -223,6 +223,8 @@ div.sticky {
    border-radius: 4px;
    align:center;
    }
+
+
    .checkbutton{ background-color: #3CBC8D;
   border: none;
   color: white;
@@ -233,13 +235,12 @@ div.sticky {
    border-radius: 4px;
    align:center;
    }
-
 </style>
 
 </head>
 <body>
 <ul>
-<li><a href="gather-app-Client.php"><i class="fa fa-home"></i> Home</a></li>
+<li><a href="gather-app-Worker.php" ><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
     <div class="dropdown-content">
@@ -256,18 +257,17 @@ div.sticky {
    
 </ul>
 
+
 <div id="mySidenav" class="sidenav">
-<a href="#"><i class="fas fa-user"></i><? session_start(); echo $_SESSION['username'];
-if($_SESSION['insideB']!=" "){
+<a href="#"><i class="fas fa-user"></i><? echo $_SESSION['username']."<br>";echo "working at :".$_SESSION["workerBuisness"];  if($_SESSION['insideB']!=" "){
 	 echo "<br>youre in:".$_SESSION['insideB'];
  }
-?> </a>
-
- <a href="#"><i class="fa fa-home"></i> Home</a>
+ ?> </a> <a href="gather-app-Worker.php"><i class="fa fa-home"></i> Home</a>
+ <a href="gather-app-Worker-manual.php" ><i  class ="fas fa-store-alt"></i>Store presence update</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="gather-app-Client.php"><i class='fab fa-drupal'></i> Client-app</a>
-  <a href="settings_client.php"><i class="fas fa-cogs"></i> settings</a>
-  <a href="rate_us^client.php"><i class="fas fa-grin-stars"></i> Rate us</a>
+  <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
+  <a href="settings_worker.php"><i class="fas fa-cogs"></i> settings</a>
+  <a href="rate_us^worker.php"><i class="fas fa-grin-stars"></i> rate us</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
 <div class="sticky"><b id="clock" style="font-family:Baumans;font-size:48px; float:right;"></b>
@@ -379,7 +379,7 @@ if($_SESSION['insideB']!=" "){
        if (!$conn) {
          die("Connection failed: " . mysqli_connect_error());
          }
-        $records = mysqli_query($conn, "SELECT `id`, `name`, `address`, `city`, `max-capacity`, `category`, `user-name`, `real-time`
+        $records = mysqli_query($conn, "SELECT `id`, `name`, `addess`, `city`, `max-capacity`, `category`, `user-name`, `real-time`
 		FROM `shops` WHERE 1");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
@@ -396,7 +396,6 @@ mysqli_close($conn);
 <div id="divik"><p align="center" style='font-family:Baumans'><button id="gm" type="button" ><i class="fas fa-map-marked-alt"></i>  map</button></p>
 <p align="center" style='font-family:Baumans'><iframe style="display:none" id="if3" src="maps.php" height="400" width="500" ></iframe></p></div>
 <br><br><br>
-
 
 <h2 style='font-family:Baumans'>Search</h2>
 <!-- Text input to enter the employee's name -->
@@ -438,8 +437,7 @@ $('#search_button').click(function(){
                 $.each(results, function(key, value){
                     //The name of the employee will be present
                     //in the "name" property.
-                    $('#search_results').append('<p align=center>results: <button onclick="loadDocs(this.value)" class="checkbutton" value="'
-                    +value.id+'">check in:'+value.name+'</button><br>'+value.address+'</p>');
+                    $('#search_results').append('<p align=center>results: <button onclick="loadDocs(this.value)" class="checkbutton" value="'+value.id+'">check in:'+value.name+'</button><br>'+value.address+'</p>');
                 });
                 //If no employees match the name that was searched for, display a
                 //message saying that no results were found.
@@ -449,6 +447,8 @@ $('#search_button').click(function(){
             }
         });
     });
+
+
 
 
 
