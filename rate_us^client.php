@@ -247,7 +247,7 @@ div.sticky {
 </head>
 <body>
 <ul>
-  <li><a href="gather-app-manager.php" ><i class="fa fa-home"></i> Home</a></li>
+<li><a href="gather-app-Client.php"><i class="fa fa-home"></i> Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-plus"></i> sign-up</a>
     <div class="dropdown-content">
@@ -258,10 +258,10 @@ div.sticky {
   </li>
   <li><a href="gather-contact.htm"><i class="fas fa-paper-plane"></i> Contact</a></li>
   <li><a href="gather-about.htm"><i class="fas fa-info-circle"></i> About</a></li>
-    <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
-	 <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+  <li><a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a></li>
+  <li><a href="#"><?php session_start();if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
   {echo "Welcome , " . $_SESSION['username'] . "!";} else {echo "Please log in first to see this page.";}?></a></li>
-  
+   
 </ul>
 
 <div id="mySidenav" class="sidenav">
@@ -270,14 +270,16 @@ if($_SESSION['insideB']!=" "){
 	 echo "<br>youre in:".$_SESSION['insideB'];
  }
 ?> </a>
- <a href="gather-app-manager.php"><i class="fa fa-home"></i> Home</a>
- <a href="gather-ShopList_Manage.php" ><i  class ="fas fa-store-alt"></i>ShopList Manage</a>
+
+ <a href="gather-app-Client.php"><i class="fa fa-home"></i> Home</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="gather-app-Client^worker.php"><i class='fab fa-drupal'></i> Client-app</a>
-  <a href="settings_manager.php"><i class="fas fa-cogs"></i>settings</a>
-   <a href="rate_us^manager.php"><i class="fas fa-grin-stars"></i> rate us</a>
+  <a href="gather-app-Client.php"><i class='fab fa-drupal'></i> Client-app</a>
+  <a href="settings_client.php"><i class="fas fa-cogs"></i> settings</a>
+  <a href="rate_us^client.php"><i class="fas fa-grin-stars"></i> Rate us</a>
   <a href="gather-home.php"><i class="fas fa-sign-out-alt"></i> log-out</a>
 </div>
+
+
 
 <div class="sticky"><b id="clock" style="font-family:Baumans;font-size:48px; float:right;"></b>
 
@@ -289,7 +291,7 @@ if($_SESSION['insideB']!=" "){
 <h1>gather blocker <br> <img src="pics/gathering.png"><br></h1>
 <h2 style='font-family:Baumans'>"go out when it's safe" !<br><br><br> 
 
-  <form id="f9" action="rate_us^manager_action.php" method="post"> 
+  <form id="f9" action="rate_us^client_action.php" method="post"> 
   <div class="rate" name="rate" id="rate">
     <input type="radio" id="star5" name="rate" value="5" />
     <label for="star5" title="100/100">5 stars</label>
