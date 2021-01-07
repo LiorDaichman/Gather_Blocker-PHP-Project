@@ -154,7 +154,7 @@ h1 {
   border: 2px solid grey;
    border-radius: 4px;
    align:center;
-   margin-left:700px;
+   
    display:inline-block;}
    
    #demo{text-align:center;}
