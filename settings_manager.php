@@ -161,19 +161,11 @@ h1 {
   border: 2px solid grey;
 }
 #c1,#c2,#c3,#c33{border: 2px solid grey;
-  background-color: #3CBC8D;
+   background-color: #3CBC8D;
   color: white;
   border-radius: 4px;
   padding: 10px 32px;
   align:center;
-  }
-  #c34,#c9{border: 2px solid grey;
-  background-color: #3CBC8D;
-  color: white;
-  border-radius: 4px;
-  padding: 10px 32px;
-  align:center;
-
   }
   
   .sidenav {
@@ -242,15 +234,12 @@ div.sticky {
   border-radius:4px;
   
 }
-#f2,#f9{
-	
+#f2{
+	display: none;
     margin:auto;
     text-align:center; 
 	
 	
-}
-input[type="time"]::-webkit-calendar-picker-indicator {
-   filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
 }
 
 </style>
@@ -305,14 +294,6 @@ if($_SESSION['insideB']!=" "){
 <br>
 
 
-
-
-
-
-
-
-
-
 <form id="f1" action="settings_manager_action.php" target="_self" method="post" autocomplete="off">
 
 
@@ -345,64 +326,13 @@ if($_SESSION['insideB']!=" "){
 <br>
 
 <p align=center><button id="c2">to change one of your shops details</button></p> 
-<br>
-<br><br>
-<br>
 
-
-
-
-<div id="div6" style="display:none">
-
-<p align=center>to change one of your shops opening hours <br> if you the shop is closed please enter (00:00)-(00:00)</p> 
-
-<form id="f9" action="openhours_action.php"  method="post"target="_self">
-
-<label for="ID">select the buisness</label><br>
- <input list="ID" name="ID" id="c34" required value="">
-  <datalist id="ID">
-  
-  <?php 
-        session_start();
-        $get_user = $_SESSION['username'];
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-        $dbname = "admin";
-
-// Create connection
-        $conn = mysqli_connect($servername,$username,$password,$dbname);
-
-// Check connection
-       if (!$conn) {
-         die("Connection failed: " . mysqli_connect_error());
-         }
-        $records = mysqli_query($conn, "SELECT `id`, `name`, `address`, `city`, `max-capacity`, `category`, `user-name`, `real-time`
-		FROM `shops` WHERE `user-name`='$get_user'");  // Use select query here 
-
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['id'] ."'>" .$data['id'].">".$data['name']."</option>";  // displaying data in option menu
-        }	
-    ?>  
-  
-  </datalist><br>
-
-
-<label style="font-family:Baumans;" for="open"><i class="fas fa-door-open" ></i> opening at:
-<input style="font-family:Baumans; "type="time" name="open"><br><br>
-<label style="font-family:Baumans; "for="close"><i class="fas fa-store-alt-slash" ></i> closing at:
-<input style="font-family:Baumans;" type="time" name="close"><br><br>
-<input style="font-family:Baumans; "type="submit" value="submit">
-
-</form>
-
-<form  id="f2"  action="settings_manager_action2.php" method="post"target="_self" autocomplete="off">
+<form  id="f2" style="display:none" action="settings_manager_action2.php" method="post"target="_self" autocomplete="off">
 
 <div class="container">
   <div class="panel panel-primary">
     <div style="background-color:#3CBC8D" class="panel-heading">
-      <h2 class="panel-title">change the details of your buisness</h2>
+      <h2 class="panel-title">Add your buisness Address</h2>
     </div>
     <div class="panel-body">
 	
@@ -568,7 +498,9 @@ if($_SESSION['insideB']!=" "){
 </form>
 
 
-      </div>
+<br>
+<br><br>
+<br>
 
 
 
@@ -610,11 +542,9 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   $("#c2").click(function(){
-	$("#div6").toggle();
+	$("#f2").toggle();
   });
 });
-
-
 
 </script>
 </html>
